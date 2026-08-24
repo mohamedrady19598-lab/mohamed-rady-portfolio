@@ -1,0 +1,1213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mohamed Rady — Creative Portfolio</title>
+<meta name="description" content="Mohamed Rady — Creative portfolio featuring art direction, branding, social campaigns, presentations and video work.">
+<style>
+:root{--bg:#070707;--panel:#101010;--panel2:#151515;--text:#f4f4f2;--muted:#999;--line:#242424;--accent:#d7ff3f;--max:1440px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,Helvetica,sans-serif;line-height:1.45}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}
+.container{width:min(calc(100% - 48px),var(--max));margin:auto}
+.nav{position:fixed;z-index:50;top:0;left:0;right:0;background:rgba(7,7,7,.72);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-size:15px;font-weight:800;letter-spacing:.12em}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;font-size:13px;text-transform:uppercase;letter-spacing:.08em}.nav-links a{opacity:.72}.nav-links a:hover,.nav-links a.active{opacity:1}
+.admin-btn{border:1px solid #333;background:#111;color:#fff;border-radius:100px;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
+.hero{min-height:100vh;display:grid;align-items:end;padding:150px 0 70px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,7,7,.75) 0%,rgba(7,7,7,.60) 50%,rgba(7,7,7,.78) 100%),url('assets/hero-photo.jpg') center/cover;opacity:1}
+.hero .container{position:relative}
+.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
+.hero h1{font-size:clamp(64px,11vw,170px);line-height:.82;letter-spacing:-.075em;margin:0;max-width:1100px;font-weight:800}
+.hero h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px #eee}
+.hero-bottom{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-top:60px;max-width:900px}.hero-bottom p{max-width:560px;color:#b5b5b5;font-size:17px;margin:0}.scroll{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#888}
+section{padding:120px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:48px}.kicker{color:#777;text-transform:uppercase;letter-spacing:.16em;font-size:11px}.section-title{font-size:clamp(42px,6vw,84px);line-height:.95;letter-spacing:-.05em;margin:8px 0 0}.section-copy{color:#888;max-width:420px}
+.work-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}.filter{border:1px solid #292929;background:#0c0c0c;color:#aaa;border-radius:100px;padding:10px 15px;font-size:12px;cursor:pointer}.filter.active,.filter:hover{background:#eee;color:#080808;border-color:#eee}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.card{grid-column:span 4;background:var(--panel);border:1px solid #202020;overflow:hidden;cursor:pointer;transition:.3s}.card{border-radius:var(--card-radius,0);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 16px 40px rgba(0,0,0,.25)}.thumb{aspect-ratio:16/9;background:#181818;overflow:hidden}.thumb img,.thumb video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}.card:hover .thumb img{transform:scale(1.035)}.card-body{padding:18px 18px 20px}.card-title{font-size:18px;font-weight:700}.card-meta{display:flex;justify-content:space-between;gap:12px;color:#777;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+.about{background:#0c0c0c;border-top:1px solid #171717;border-bottom:1px solid #171717}.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:80px}.big-copy{font-size:clamp(26px,3vw,46px);line-height:1.08;letter-spacing:-.035em}.muted{color:#888}.facts{display:grid;grid-template-columns:1fr 1fr;gap:28px;border-top:1px solid #282828;padding-top:20px}.fact h4{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#666}.fact p{margin:0;color:#bbb}.timeline{margin-top:55px}.job{display:grid;grid-template-columns:140px 1fr;gap:25px;padding:18px 0;border-top:1px solid #282828}.job .year{color:#777;font-size:12px}.job strong{display:block}.job span{color:#777;font-size:13px}
+.about-photo{margin-top:38px;width:min(100%,560px);aspect-ratio:4/3;background:#111;border:1px solid #242424;overflow:hidden;display:none}
+.about-photo.has-image{display:block}
+.about-photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+.contact{min-height:70vh;display:flex;align-items:center}.contact-box{border-top:1px solid #333;padding-top:30px}.contact h2{font-size:clamp(48px,8vw,120px);letter-spacing:-.065em;line-height:.9;margin:0 0 35px}.contact h2 span{color:var(--accent)}.contact-links{display:flex;flex-wrap:wrap;gap:12px}.contact-links a{padding:13px 18px;border:1px solid #333;border-radius:100px;color:#ccc;transition:transform .22s,border-color .22s,color .22s,background .22s}
+.contact-link-active:hover{background:var(--accent);color:#080808;border-color:var(--accent);transform:translateY(-2px)}
+.contact-link-disabled{opacity:.48;cursor:not-allowed}
+.contact-link-disabled:hover{border-color:#333;color:#888;background:transparent}.contact-links a:hover{background:#eee;color:#080808}
+.footer{border-top:1px solid #222;padding:25px 0;color:#666;font-size:11px;text-transform:uppercase;letter-spacing:.08em;display:flex;justify-content:space-between}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(15px);z-index:100;display:none;padding:30px;overflow:auto}.modal.open{display:block}.modal-inner{width:min(1100px,100%);margin:70px auto;background:#101010;border:1px solid #2a2a2a;border-radius:18px;padding:28px}.modal-head{display:flex;justify-content:space-between;align-items:center}.close{background:none;border:0;color:#fff;font-size:28px;cursor:pointer}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:7px;margin:12px 0}.field label{font-size:11px;text-transform:uppercase;color:#777;letter-spacing:.1em}.field input,.field select,.field textarea{background:#090909;color:#eee;border:1px solid #2c2c2c;padding:12px;border-radius:8px}.field textarea{min-height:100px;resize:vertical}.full{grid-column:1/-1}.primary{background:var(--accent);color:#070707;border:0;padding:13px 18px;border-radius:8px;font-weight:800;cursor:pointer}.danger{background:#181818;color:#ff8c8c;border:1px solid #3a2222;padding:7px 10px;border-radius:7px;cursor:pointer}.admin-list{margin-top:30px;border-top:1px solid #292929}.admin-item{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:14px 0;border-bottom:1px solid #222}.admin-item small{color:#777}.empty{padding:60px;text-align:center;color:#666;border:1px dashed #2b2b2b}
+.viewer{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:35px}.viewer.open{display:flex}.viewer img,.viewer video,.viewer iframe{max-width:95vw;max-height:90vh;border:1px solid #333;background:#090909}.viewer .viewer-close{position:absolute;right:28px;top:20px;background:none;border:0;color:#fff;font-size:32px;cursor:pointer}
+.toast{position:fixed;right:20px;bottom:20px;background:#eee;color:#070707;padding:12px 16px;border-radius:8px;font-size:12px;display:none;z-index:200}.toast.show{display:block}
+@media(max-width:900px){.nav-links{gap:12px;font-size:10px}.admin-btn{display:none}.card{grid-column:span 6}.about-grid{grid-template-columns:1fr;gap:45px}.hero h1{font-size:18vw}.hero-bottom{display:block}.scroll{margin-top:30px}.admin-grid{grid-template-columns:1fr}.full{grid-column:auto}}
+@media(max-width:560px){.container{width:min(calc(100% - 28px),var(--max))}.nav-inner{height:64px}.nav-links{gap:9px}.nav-links a{font-size:9px}.hero{padding-top:120px}.card{grid-column:1/-1}.facts{grid-template-columns:1fr}.job{grid-template-columns:90px 1fr}.footer{display:block}.footer span{display:block;margin-top:8px}}
+
+.builder-tabbar{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid #292929;padding-bottom:12px;margin:18px 0}
+.builder-tab{background:#111;color:#888;border:1px solid #292929;border-radius:100px;padding:9px 14px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
+.builder-tab.active,.builder-tab:hover{background:#eee;color:#080808;border-color:#eee}
+.builder-panel{display:none}.builder-panel.active{display:block}
+.builder-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.builder-control{background:#0b0b0b;border:1px solid #242424;border-radius:10px;padding:14px}
+.builder-control h4{margin:0 0 10px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#777}
+.range-row{display:grid;grid-template-columns:1fr 70px;gap:10px;align-items:center}
+.range-row input[type=range]{width:100%}
+.range-row input[type=number],.builder-control select,.builder-control input[type=text],.builder-control input[type=color]{width:100%;background:#090909;color:#eee;border:1px solid #2d2d2d;padding:9px;border-radius:7px}
+.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.palette-item{display:flex;align-items:center;gap:6px;color:#aaa;font-size:11px}
+.switch-row{display:flex;justify-content:space-between;gap:10px;align-items:center;color:#aaa;font-size:12px}
+.switch-row input{accent-color:#d7ff3f}
+.builder-section-title{font-size:14px;font-weight:800;margin:20px 0 10px}
+.preview-note{font-size:11px;color:#666;margin:8px 0 0}
+@media(max-width:700px){.builder-grid{grid-template-columns:1fr}.palette{grid-template-columns:repeat(2,1fr)}}
+
+
+.editor-shell{max-width:1250px}
+.editor-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;margin-top:20px}
+.editor-sidebar{display:flex;flex-direction:column;gap:7px;position:sticky;top:10px;height:max-content}
+.side-tab{background:#0d0d0d;color:#8d8d8d;border:1px solid #252525;border-radius:9px;padding:12px 13px;text-align:left;cursor:pointer;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.side-tab.active,.side-tab:hover{background:#eee;color:#090909;border-color:#eee}
+.editor-panel{display:none}.editor-panel.active{display:block}
+.panel-header{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:20px}
+.panel-header h3{font-size:24px;margin:5px 0 0;letter-spacing:-.03em}
+.subhead{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:#666;border-bottom:1px solid #222;padding:20px 0 9px;margin-bottom:12px}
+.control-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.control-card{background:#0b0b0b;border:1px solid #242424;border-radius:10px;padding:13px}
+.control-card.full{grid-column:1/-1}
+.control-card h4{font-size:10px;color:#777;text-transform:uppercase;letter-spacing:.1em;margin:0 0 7px}
+.control-card input[type=text],.control-card input[type=number],.control-card input[type=url],.control-card input[type=file],.control-card textarea,.control-card select{width:100%;box-sizing:border-box;background:#090909;color:#eee;border:1px solid #303030;border-radius:7px;padding:10px}
+.control-card textarea{min-height:95px;resize:vertical}
+.control-card small{display:block;color:#666;font-size:10px;margin-top:5px}
+.color-row{display:flex;gap:10px;align-items:center}.color-row input[type=color]{width:46px;height:38px;padding:0;border:0;background:transparent}.color-row span{color:#777;font-family:monospace;font-size:11px}
+.palette-actions,.backup-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.project-manager-list,.category-manager-list{border-top:1px solid #252525}
+.project-editor-top{display:grid;grid-template-columns:1fr minmax(260px,380px);gap:18px;align-items:end;margin-bottom:10px}
+.project-editor-intro .manager-note{margin:0;color:#777;font-size:12px;line-height:1.6}
+.project-manager-tools{display:grid;grid-template-columns:1fr 180px;gap:8px}
+.project-manager-tools input,.project-manager-tools select{width:100%;background:#090909;color:#eee;border:1px solid #303030;border-radius:7px;padding:10px}
+.project-form-shell{background:#0a0a0a;border:1px solid #242424;border-radius:12px;padding:16px}
+.project-form-actions{display:flex;gap:8px;flex-wrap:wrap}
+.project-form-actions .secondary{border:1px solid #333;background:#151515;color:#ddd;border-radius:8px;padding:11px 15px;cursor:pointer}
+.pm-row{display:grid;grid-template-columns:70px 1fr auto;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #222}
+.pm-thumb{width:70px;height:46px;border-radius:7px;overflow:hidden;background:#161616;border:1px solid #282828}
+.pm-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.pm-copy b{display:block;font-size:13px}.pm-copy small{display:block;color:#666;font-size:10px;margin-top:4px}
+.pm-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.pm-actions button{border:1px solid #333;background:#151515;color:#ddd;border-radius:7px;padding:7px 10px;cursor:pointer;font-size:10px}
+.pm-actions .edit-project{color:#bdefff;border-color:#24404a}
+.pm-actions .delete-project{color:#ff9999;border-color:#412727}
+.project-files-list{margin-top:10px;border-top:1px solid #222}
+.project-file-row{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #202020}
+.project-file-icon{width:44px;height:32px;border-radius:6px;background:#151515;border:1px solid #292929;display:flex;align-items:center;justify-content:center;color:#8f8f8f;font-size:10px;text-transform:uppercase}
+.project-file-name{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.project-file-meta{color:#666;font-size:10px;margin-top:3px}
+.project-file-actions{display:flex;gap:6px}.project-file-actions button{border:1px solid #333;background:#151515;color:#ddd;border-radius:6px;padding:6px 8px;font-size:10px;cursor:pointer}.project-file-actions .remove-file{color:#ff9999;border-color:#412727}
+.file-count-badge{display:inline-flex;align-items:center;gap:5px;color:#777;font-size:10px;margin-left:8px}
+.viewer-shell{width:min(1180px,96vw);height:min(90vh,860px);display:flex;flex-direction:column;gap:12px}
+.viewer-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.viewer-stage img,.viewer-stage video,.viewer-stage iframe{max-width:100%;max-height:100%;width:auto;height:auto;border:1px solid #333;background:#090909}
+.viewer-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #222;padding-top:10px}
+.viewer-toolbar .viewer-title{min-width:0}.viewer-toolbar .viewer-title b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.viewer-toolbar .viewer-title small{color:#666}
+.viewer-nav{display:flex;gap:7px}.viewer-nav button{border:1px solid #333;background:#151515;color:#ddd;border-radius:7px;padding:8px 11px;cursor:pointer}.viewer-nav button:disabled{opacity:.35;cursor:not-allowed}
+@media(max-width:700px){.project-file-row{grid-template-columns:40px 1fr}.project-file-actions{grid-column:2}.viewer-shell{height:86vh}.viewer-toolbar{display:block}.viewer-nav{margin-top:8px}}
+
+@media(max-width:850px){.project-editor-top{grid-template-columns:1fr}.project-manager-tools{grid-template-columns:1fr}.pm-row{grid-template-columns:56px 1fr}.pm-actions{grid-column:2;justify-content:flex-start}.pm-thumb{width:56px;height:40px}}
+
+.pm-row,.cat-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #222}.pm-row small{display:block;color:#666;font-size:10px;margin-top:3px}
+.danger{background:#191919;color:#ff9999;border:1px solid #412727;padding:7px 10px;border-radius:7px;cursor:pointer}
+.toggle input{display:none}.toggle span{display:block;width:42px;height:23px;background:#333;border-radius:30px;position:relative;cursor:pointer}.toggle span:before{content:"";position:absolute;width:17px;height:17px;left:3px;top:3px;background:#999;border-radius:50%;transition:.2s}.toggle input:checked+span{background:var(--accent)}.toggle input:checked+span:before{left:22px;background:#070707}
+.file-button{display:inline-flex;align-items:center}
+@media(max-width:850px){.editor-layout{grid-template-columns:1fr}.editor-sidebar{position:static;display:grid;grid-template-columns:repeat(2,1fr)}.control-grid{grid-template-columns:1fr}.control-card.full{grid-column:auto}.panel-header{display:block}.panel-header .primary{margin-top:12px}}
+
+
+.hero:before{
+  background-image:
+    linear-gradient(90deg,
+      rgba(7,7,7,var(--hero-overlay,0.72)) 0%,
+      rgba(7,7,7,var(--hero-overlay,0.62)) 55%,
+      rgba(7,7,7,var(--hero-overlay,0.82)) 100%),
+    var(--hero-image, url('assets/hero-photo.jpg'));
+  background-position:var(--hero-position,center center);
+  background-size:var(--hero-size,cover);
+  background-repeat:no-repeat;
+}
+
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#home">MOHAMED <span>RADY</span></a>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#works">My Works</a>
+      <a href="#about">About Me</a>
+      <a href="#contact">Contact Me</a>
+    </div>
+    <button class="admin-btn" id="adminOpen">Edit Site</button>
+  </div>
+</nav>
+
+<main>
+<section class="hero" id="home">
+  <div class="container">
+    <div class="eyebrow">Creative Director / Art Director / Visual Designer</div>
+    <h1>IDEAS<br><em>LOOK</em> BETTER.</h1>
+    <div class="hero-bottom">
+      <p>With a passion for storytelling through visuals, I bring ideas to life by blending concept, color, and composition into meaningful design.</p>
+      <div class="scroll">Scroll to explore ↓</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="works">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="kicker">Selected Work</div><h2 class="section-title">My Works</h2></div>
+      <div class="section-copy">A selection of art direction, campaigns, social content, branding and presentation work from the current portfolio.</div>
+    </div>
+    <div class="work-nav" id="filters"></div>
+    <div class="grid" id="workGrid"></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">A little about me</div><h2 class="section-title">About Me</h2></div></div>
+    <div class="about-grid">
+      <div>
+        <p class="big-copy">With a passion for storytelling through visuals, I bring ideas to life by blending concept, color, and composition into meaningful design.</p>
+        <p class="muted">Over the years, I've led and crafted visual identities, campaigns, and content that not only communicate but connect. I believe in design that's thoughtful, strategic, and always evolving—just like the brands and people it serves.</p>
+        <div class="about-photo" id="aboutPhotoSlot" aria-label="About image slot">
+          <img id="aboutPhoto" src="" alt="About Mohamed Rady">
+        </div>
+      </div>
+      <div>
+        <div class="facts">
+          <div class="fact"><h4>Based in</h4><p>Cairo, Egypt</p></div>
+          <div class="fact"><h4>Focus</h4><p>Creative Direction, Art Direction & Visual Design</p></div>
+          <div class="fact"><h4>Languages</h4><p>Arabic (Native) / English (Professional)</p></div>
+          <div class="fact"><h4>Education</h4><p>BA of Specific Education</p></div>
+        </div>
+        <div class="timeline">
+          <div class="kicker">Experience</div>
+          <div class="job"><div class="year">2025–2026</div><div><strong>Archideo</strong><span>Art Director · Remote</span></div></div>
+          <div class="job"><div class="year">2025–2026</div><div><strong>Myco-MyAgency</strong><span>Creative Team Lead · Hybrid</span></div></div>
+          <div class="job"><div class="year">2024–2025</div><div><strong>Atlas Solutions</strong><span>Art Director · Part time / Remote</span></div></div>
+          <div class="job"><div class="year">2024–2025</div><div><strong>SocialEyez</strong><span>Sr Graphic Designer · Full Time</span></div></div>
+          <div class="job"><div class="year">2023–2024</div><div><strong>SVG</strong><span>Art Director · Full Time</span></div></div>
+          <div class="job"><div class="year">2022–2023</div><div><strong>Marketing</strong><span>Sr Graphic Designer · Full Time</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-box">
+      <div class="kicker">Let's work together</div>
+      <h2>HAVE AN IDEA?<br><span>LET'S MAKE IT.</span></h2>
+      <div class="contact-links" id="contactLinks"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="container footer"><span>© <span id="year"></span> Mohamed Rady</span><span>Creative Portfolio</span></footer>
+
+
+<div class="modal" id="adminModal">
+  <div class="modal-inner editor-shell">
+    <div class="modal-head">
+      <div>
+        <div class="kicker">Website Control Center</div>
+        <h2 style="margin:4px 0 0">Edit My Portfolio</h2>
+      </div>
+      <button class="close" id="adminClose">×</button>
+    </div>
+
+    <div class="editor-layout">
+      <aside class="editor-sidebar">
+        <button class="side-tab active" data-panel="site">✦ Site Settings</button>
+        <button class="side-tab" data-panel="text">Aa Text & Typography</button>
+        <button class="side-tab" data-panel="colors">● Colors</button>
+        <button class="side-tab" data-panel="layout">↔ Layout & Spacing</button>
+        <button class="side-tab" data-panel="projects">＋ Add / Manage Projects</button>
+        <button class="side-tab" data-panel="categories">☰ Categories</button>
+        <button class="side-tab" data-panel="backup">↥ Backup</button>
+      </aside>
+
+      <div class="editor-content">
+
+        <section class="editor-panel active" id="panel-site">
+          <div class="panel-header">
+            <div><div class="kicker">Site Settings</div><h3>Everything starts here</h3></div>
+            <button class="primary save-all">Save All Changes</button>
+          </div>
+          <div class="control-grid">
+            <div class="control-card full"><h4>Site Name</h4><input id="setSiteName" type="text" placeholder="MOHAMED RADY"></div>
+            <div class="control-card"><h4>Logo Text</h4><input id="setLogoText" type="text"></div>
+            <div class="control-card"><h4>Accent Logo Text</h4><input id="setLogoAccent" type="text"></div>
+            <div class="control-card"><h4>Show Manage Button</h4><label class="toggle"><input id="setShowManage" type="checkbox"><span></span></label></div>
+            <div class="control-card"><h4>Sticky Navigation</h4><label class="toggle"><input id="setSticky" type="checkbox"><span></span></label></div>
+            <div class="control-card full"><h4>Hero / Banner Background Image</h4>
+              <input id="heroImageFile" type="file" accept="image/*">
+              <small>Upload a new image. Leave empty to keep the current one.</small>
+            </div>
+            <div class="control-card"><h4>Background Position</h4>
+              <select id="heroPosition">
+                <option value="center center">Center / Center</option>
+                <option value="left center">Left / Center</option>
+                <option value="right center">Right / Center</option>
+                <option value="center top">Center / Top</option>
+                <option value="center bottom">Center / Bottom</option>
+                <option value="left top">Left / Top</option>
+                <option value="right top">Right / Top</option>
+              </select>
+            </div>
+            <div class="control-card"><h4>Background Size</h4>
+              <select id="heroSizeMode">
+                <option value="cover">Cover</option>
+                <option value="contain">Contain</option>
+                <option value="100% 100%">Stretch</option>
+              </select>
+            </div>
+            <div class="control-card"><h4>Image Opacity</h4><input id="heroOpacity" type="number" min="0" max="1" step="0.05"></div>
+            <div class="control-card"><h4>Dark Overlay</h4><input id="heroOverlay" type="number" min="0" max="1" step="0.05"></div>
+
+            <div class="control-card full">
+              <h4>Hero Preview</h4>
+              <div id="heroPreview" style="height:180px;border-radius:10px;border:1px solid #2b2b2b;background:center/cover no-repeat;"></div>
+            </div>
+
+            <div class="control-card full">
+              <h4>About / Profile Image</h4>
+              <input id="aboutImageFile" type="file" accept="image/*">
+              <small>Upload the image shown below the About Me text on the left. Leave empty to keep the current image.</small>
+              <div id="aboutImagePreview" style="height:180px;margin-top:10px;border-radius:10px;border:1px solid #2b2b2b;background:#111 center/cover no-repeat;display:none;"></div>
+            </div>
+
+
+          </div>
+        </section>
+
+        <section class="editor-panel" id="panel-text">
+          <div class="panel-header">
+            <div><div class="kicker">Text & Typography</div><h3>Edit every visible phrase</h3></div>
+            <button class="primary save-all">Save All Changes</button>
+          </div>
+
+          <div class="subhead">Navigation</div>
+          <div class="control-grid">
+            <div class="control-card"><h4>Home</h4><input id="txtNavHome" type="text"></div>
+            <div class="control-card"><h4>My Works</h4><input id="txtNavWorks" type="text"></div>
+            <div class="control-card"><h4>About Me</h4><input id="txtNavAbout" type="text"></div>
+            <div class="control-card"><h4>Contact Me</h4><input id="txtNavContact" type="text"></div>
+          </div>
+
+          <div class="subhead">Home / Hero</div>
+          <div class="control-grid">
+            <div class="control-card full"><h4>Eyebrow</h4><input id="txtHeroEyebrow" type="text"></div>
+            <div class="control-card full"><h4>Main Headline</h4><textarea id="txtHeroHeadline"></textarea><small>Use a new line to create line breaks.</small></div>
+            <div class="control-card full"><h4>Hero Description</h4><textarea id="txtHeroDesc"></textarea></div>
+            <div class="control-card"><h4>Scroll Label</h4><input id="txtScroll" type="text"></div>
+          </div>
+
+          <div class="subhead">My Works</div>
+          <div class="control-grid">
+            <div class="control-card"><h4>Section Kicker</h4><input id="txtWorksKicker" type="text"></div>
+            <div class="control-card"><h4>Section Title</h4><input id="txtWorksTitle" type="text"></div>
+            <div class="control-card full"><h4>Section Description</h4><textarea id="txtWorksDesc"></textarea></div>
+          </div>
+
+          <div class="subhead">About</div>
+          <div class="control-grid">
+            <div class="control-card"><h4>Section Kicker</h4><input id="txtAboutKicker" type="text"></div>
+            <div class="control-card"><h4>Section Title</h4><input id="txtAboutTitle" type="text"></div>
+            <div class="control-card full"><h4>Main Description</h4><textarea id="txtAboutMain"></textarea></div>
+            <div class="control-card full"><h4>Secondary Description</h4><textarea id="txtAboutSecondary"></textarea></div>
+          </div>
+
+          <div class="subhead">Contact</div>
+          <div class="control-grid">
+            <div class="control-card"><h4>Kicker</h4><input id="txtContactKicker" type="text"></div>
+            <div class="control-card"><h4>Headline</h4><input id="txtContactTitle" type="text"></div>
+            <div class="control-card"><h4>Second Line</h4><input id="txtContactSecond" type="text"></div>
+            <div class="control-card"><h4>Email</h4><input id="txtEmail" type="text"></div>
+            <div class="control-card"><h4>Behance URL</h4><input id="txtBehance" type="url"></div>
+            <div class="control-card"><h4>LinkedIn URL</h4><input id="txtLinkedin" type="url" placeholder="https://www.linkedin.com/in/..."></div>
+            <div class="control-card"><h4>WhatsApp Number</h4><input id="txtWhatsapp" type="text" placeholder="2010XXXXXXXX"></div>
+            <div class="control-card"><h4>Instagram URL</h4><input id="txtInstagram" type="url" placeholder="https://www.instagram.com/..."></div>
+            <div class="control-card"><h4>Facebook URL</h4><input id="txtFacebook" type="url" placeholder="https://www.facebook.com/..."></div>
+            <div class="control-card"><h4>Email Button</h4><input id="txtEmailButton" type="text"></div>
+            <div class="control-card"><h4>WhatsApp Button</h4><input id="txtWhatsappButton" type="text"></div>
+            <div class="control-card"><h4>Behance Button</h4><input id="txtBehanceButton" type="text"></div>
+            <div class="control-card"><h4>LinkedIn Button</h4><input id="txtLinkedinButton" type="text"></div>
+          </div>
+
+          <div class="subhead">Typography Controls</div>
+          <div class="control-grid">
+            <div class="control-card full"><h4>Font Family</h4>
+              <select id="typFont">
+                <option value="Inter, Arial, Helvetica, sans-serif">Inter / Modern Sans</option>
+                <option value="Arial, Helvetica, sans-serif">Arial</option>
+                <option value="Helvetica, Arial, sans-serif">Helvetica</option>
+                <option value="Verdana, Arial, sans-serif">Verdana</option>
+                <option value="Georgia, serif">Georgia</option>
+                <option value="'Times New Roman', serif">Times New Roman</option>
+                <option value="monospace">Monospace</option>
+              </select>
+            </div>
+            <div class="control-card"><h4>Hero Font Weight</h4><select id="typHeroWeight"><option>600</option><option>700</option><option selected>800</option><option>900</option></select></div>
+            <div class="control-card"><h4>Body Font Weight</h4><select id="typBodyWeight"><option>300</option><option selected>400</option><option>500</option><option>600</option></select></div>
+            <div class="control-card"><h4>Hero Size</h4><input id="typHeroSize" type="number" min="40" max="240"></div>
+            <div class="control-card"><h4>Section Title Size</h4><input id="typSectionSize" type="number" min="30" max="150"></div>
+            <div class="control-card"><h4>Body Size</h4><input id="typBodySize" type="number" min="11" max="28"></div>
+            <div class="control-card"><h4>Hero Letter Spacing (em)</h4><input id="typTracking" type="number" min="-0.2" max="0.1" step="0.005"></div>
+            <div class="control-card"><h4>Body Line Height</h4><input id="typLineHeight" type="number" min="1" max="2.2" step="0.05"></div>
+          </div>
+        </section>
+
+        <section class="editor-panel" id="panel-colors">
+          <div class="panel-header">
+            <div><div class="kicker">Colors</div><h3>Build your own palette</h3></div>
+            <button class="primary save-all">Save All Changes</button>
+          </div>
+          <div class="control-grid">
+            <div class="control-card"><h4>Background</h4><div class="color-row"><input id="colBg" type="color"><span id="colBgHex"></span></div></div>
+            <div class="control-card"><h4>Card / Panel</h4><div class="color-row"><input id="colPanel" type="color"><span id="colPanelHex"></span></div></div>
+            <div class="control-card"><h4>Main Text</h4><div class="color-row"><input id="colText" type="color"><span id="colTextHex"></span></div></div>
+            <div class="control-card"><h4>Muted Text</h4><div class="color-row"><input id="colMuted" type="color"><span id="colMutedHex"></span></div></div>
+            <div class="control-card"><h4>Accent / Cyan</h4><div class="color-row"><input id="colAccent" type="color"><span id="colAccentHex"></span></div></div>
+            <div class="control-card"><h4>Hero Outline Text</h4><div class="color-row"><input id="colHeroOutline" type="color"><span id="colHeroOutlineHex"></span></div></div>
+            <div class="control-card"><h4>Navigation Text</h4><div class="color-row"><input id="colNavText" type="color"><span id="colNavTextHex"></span></div></div>
+            <div class="control-card"><h4>Card Text</h4><div class="color-row"><input id="colCardText" type="color"><span id="colCardTextHex"></span></div></div>
+            <div class="control-card"><h4>Borders</h4><div class="color-row"><input id="colLine" type="color"><span id="colLineHex"></span></div></div>
+          </div>
+          <div class="palette-actions"><button class="secondary" id="presetDark">Dark Preset</button><button class="secondary" id="presetLight">Light Preset</button><button class="secondary" id="presetLime">Lime Accent</button></div>
+        </section>
+
+        <section class="editor-panel" id="panel-layout">
+          <div class="panel-header">
+            <div><div class="kicker">Layout & Spacing</div><h3>Move and size the interface</h3></div>
+            <button class="primary save-all">Save All Changes</button>
+          </div>
+          <div class="subhead">Global</div>
+          <div class="control-grid">
+            <div class="control-card"><h4>Content Max Width</h4><input id="layMax" type="number" min="900" max="2200"></div>
+            <div class="control-card"><h4>Navbar Height</h4><input id="layNav" type="number" min="50" max="120"></div>
+            <div class="control-card"><h4>Grid Gap</h4><input id="layGap" type="number" min="6" max="50"></div>
+            <div class="control-card"><h4>Card Radius</h4><input id="layRadius" type="number" min="0" max="40"></div>
+          </div>
+          <div class="subhead">Hero</div>
+          <div class="control-grid">
+            <div class="control-card"><h4>Top Padding</h4><input id="layHeroTop" type="number" min="60" max="300"></div>
+            <div class="control-card"><h4>Bottom Padding</h4><input id="layHeroBottom" type="number" min="20" max="200"></div>
+            <div class="control-card"><h4>Max Headline Width</h4><input id="layHeroWidth" type="number" min="500" max="1500"></div>
+            <div class="control-card"><h4>Alignment</h4><select id="layHeroAlign"><option>left</option><option>center</option><option>right</option></select></div>
+          </div>
+          <div class="subhead">Sections</div>
+          <div class="control-grid">
+            <div class="control-card"><h4>Top Spacing</h4><input id="laySectionTop" type="number" min="30" max="250"></div>
+            <div class="control-card"><h4>Bottom Spacing</h4><input id="laySectionBottom" type="number" min="30" max="250"></div>
+            <div class="control-card"><h4>Work Columns</h4><select id="layColumns"><option value="3">3</option><option value="4">4</option><option value="6">6</option></select></div>
+            <div class="control-card"><h4>Mobile Card Break</h4><select id="layMobile"><option value="1">1 column</option><option value="2">2 columns</option></select></div>
+          </div>
+        </section>
+
+        <section class="editor-panel" id="panel-projects">
+          <div class="panel-header">
+            <div>
+              <div class="kicker">Projects</div>
+              <h3>Build and manage your portfolio</h3>
+            </div>
+            <button class="primary save-all">Save All Changes</button>
+          </div>
+
+          <div class="project-editor-top">
+            <div class="project-editor-intro">
+              <div class="builder-section-title" style="margin-top:0">Project Manager</div>
+              <p class="manager-note">Your portfolio starts empty. Add only the projects you want to show. Every project uses the same portfolio card style and can be edited or deleted later.</p>
+            </div>
+            <div class="project-manager-tools">
+              <input id="projectSearch" type="text" placeholder="Search projects...">
+              <select id="projectCategoryFilter">
+                <option value="All">All categories</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="project-form-shell">
+            <div class="subhead" id="projectFormTitle">Add Project</div>
+            <input id="editingProjectId" type="hidden">
+            <div class="control-grid">
+              <div class="control-card">
+                <h4>Project Name</h4>
+                <input id="projTitle" type="text" placeholder="e.g. Ramadan Campaign">
+              </div>
+              <div class="control-card">
+                <h4>Category</h4>
+                <select id="projCategory"></select>
+              </div>
+              <div class="control-card">
+                <h4>Project Description</h4>
+                <input id="projDesc" type="text" placeholder="Short description">
+              </div>
+              <div class="control-card">
+                <h4>My Role</h4>
+                <input id="projRole" type="text" placeholder="Art Direction / Design">
+              </div>
+              <div class="control-card full">
+                <h4>Project Process / Case Study</h4>
+                <textarea id="projProcess" placeholder="Concept, approach, execution..."></textarea>
+              </div>
+              <div class="control-card full">
+                <h4>Project Files</h4>
+                <input id="projFiles" type="file" accept="image/*,video/*,application/pdf" multiple>
+                <small>Each time you choose files they are ADDED to the queue — they do not replace previous selections. Repeat this as many times as needed, then save the project.</small>
+                <div id="pendingFilesCount" class="preview-note"></div>
+                <div id="pendingFilesList" class="project-files-list"></div>
+                <div id="existingFilesList" class="project-files-list"></div>
+              </div>
+              <div class="control-card">
+                <h4>Thumbnail / Cover</h4>
+                <input id="projThumb" type="file" accept="image/*">
+                <small>One thumbnail only. It is used on the portfolio card.</small>
+              </div>
+              <div class="control-card full">
+                <div class="project-form-actions">
+                  <button class="primary" id="addProject">＋ Add Project</button>
+                  <button class="secondary" id="cancelProjectEdit" type="button" style="display:none">Cancel Edit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subhead">Your Projects</div>
+          <div id="projectManagerList" class="project-manager-list"></div>
+        </section>
+
+        <section class="editor-panel" id="panel-categories">
+          <div class="panel-header">
+            <div><div class="kicker">Categories</div><h3>Create and organize sections</h3></div>
+          </div>
+          <div class="control-grid">
+            <div class="control-card"><h4>New Category</h4><input id="newCategory" type="text" placeholder="e.g. AI Experiments"></div>
+            <div class="control-card"><h4>Add</h4><button class="primary" id="addCategory">Add Category</button></div>
+          </div>
+          <div class="subhead">Current Categories</div>
+          <div id="categoryManagerList" class="category-manager-list"></div>
+        </section>
+
+        <section class="editor-panel" id="panel-backup">
+          <div class="panel-header">
+            <div><div class="kicker">Backup</div><h3>Keep your work safe</h3></div>
+          </div>
+          <div class="manager-note">Export all your browser-based settings and added projects into one backup file. Import it later in this same version of the site.</div>
+          <div class="backup-actions">
+            <button class="primary" id="exportBackup">Export Full Backup</button>
+            <label class="secondary file-button">Import Backup<input id="importBackup" type="file" accept=".json" hidden></label>
+            <button class="secondary" id="resetCustom">Delete Added Projects</button>
+            <button class="secondary" id="resetSettings">Reset Design Settings</button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="viewer" id="viewer">
+  <button class="viewer-close" id="viewerClose">×</button>
+  <div class="viewer-shell">
+    <div class="viewer-stage" id="viewerContent"></div>
+    <div class="viewer-toolbar">
+      <div class="viewer-title" id="viewerTitle"></div>
+      <div class="viewer-nav">
+        <button id="viewerPrev">← Prev</button>
+        <button id="viewerNext">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+
+
+<script>
+const BUILT_IN = [];
+  const DEFAULT_CATS = ["Presentation Designs","Art Directions","Creative Ads Presentations","Branding Projects","Social Media Campaigns","Videos"];
+
+const DEFAULT_CONTENT = {
+  siteName:"MOHAMED RADY",logoText:"MOHAMED",logoAccent:"RADY",
+  navHome:"Home",navWorks:"My Works",navAbout:"About Me",navContact:"Contact Me",
+  heroEyebrow:"Creative Director / Art Director / Visual Designer",
+  heroHeadline:"IDEAS\nLOOK BETTER.",
+  heroDesc:"With a passion for storytelling through visuals, I bring ideas to life by blending concept, color, and composition into meaningful design.",
+  scrollLabel:"Scroll to explore ↓",
+  worksKicker:"Selected Work",worksTitle:"My Works",worksDesc:"A selection of art direction, campaigns, social content, branding and presentation work from the current portfolio.",
+  aboutKicker:"A little about me",aboutTitle:"About Me",
+  aboutMain:"With a passion for storytelling through visuals, I bring ideas to life by blending concept, color, and composition into meaningful design.",
+  aboutSecondary:"Over the years, I've led and crafted visual identities, campaigns, and content that not only communicate but connect. I believe in design that's thoughtful, strategic, and always evolving—just like the brands and people it serves.",
+  contactKicker:"Let's work together",contactTitle:"HAVE AN IDEA?",contactSecond:"LET'S MAKE IT.",email:"mohamedrady19598@gmail.com",
+  behance:"https://www.behance.net/mohamedradyDesigns",linkedin:"",whatsapp:"",instagram:"",facebook:"",
+  emailButton:"Email Me",whatsappButton:"WhatsApp",behanceButton:"Behance",linkedinButton:"LinkedIn"
+};
+const DEFAULT_DESIGN = {
+  bg:"#070707",panel:"#101010",text:"#f4f4f2",muted:"#999999",accent:"#00F0FF",line:"#242424",
+  heroOutline:"#f4f4f2",navText:"#cfcfcf",cardText:"#f4f4f2",
+  font:"Inter, Arial, Helvetica, sans-serif",heroSize:170,heroWeight:800,heroTracking:-0.075,
+  sectionSize:84,bodySize:17,bodyWeight:400,lineHeight:1.45,
+  maxWidth:1440,navHeight:76,gridGap:18,cardRadius:0,heroTop:150,heroBottom:70,heroWidth:1100,
+  heroAlign:"left",sectionTop:120,sectionBottom:120,columns:4,mobileColumns:1,heroImage:"assets/hero-photo.jpg",heroPosition:"center center",heroSizeMode:"cover",heroOpacity:0.92,heroOverlay:0.60,aboutImageUrl:""
+};
+let db=null, styleState={}, contentState={}, categoriesState=[];
+
+const req=indexedDB.open("MohamedRadyPortfolioFullEditor",1);
+req.onupgradeneeded=e=>{
+  db=e.target.result;
+  if(!db.objectStoreNames.contains("uploads"))db.createObjectStore("uploads",{keyPath:"id",autoIncrement:true});
+  if(!db.objectStoreNames.contains("kv"))db.createObjectStore("kv",{keyPath:"key"});
+};
+req.onsuccess=e=>{db=e.target.result;initAll()};
+req.onerror=()=>{initAll()};
+
+const $=id=>document.getElementById(id);
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function kvGet(key){return new Promise(r=>{if(!db)return r(null);const q=db.transaction("kv","readonly").objectStore("kv").get(key);q.onsuccess=()=>r(q.result?.value??null)})}
+function kvSet(key,val){return new Promise(r=>{const q=db.transaction("kv","readwrite").objectStore("kv").put({key,value:val});q.onsuccess=()=>r()})}
+function uploadsGet(){return new Promise(r=>{if(!db)return r([]);const q=db.transaction("uploads","readonly").objectStore("uploads").getAll();q.onsuccess=()=>r(q.result||[])})}
+function uploadsAdd(v){return new Promise(r=>{const q=db.transaction("uploads","readwrite").objectStore("uploads").add(v);q.onsuccess=()=>r(q.result)})}
+function uploadsPut(v){return new Promise(r=>{const q=db.transaction("uploads","readwrite").objectStore("uploads").put(v);q.onsuccess=()=>r()})}
+function uploadsDelete(id){return new Promise(r=>{const q=db.transaction("uploads","readwrite").objectStore("uploads").delete(id);q.onsuccess=()=>r()})}
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1900)}
+function fileKind(file){
+  if(!file)return "image";
+  if(file.type==="application/pdf")return "pdf";
+  if(file.type.startsWith("video/"))return "video";
+  return "image";
+}
+function fileTypeLabel(kind){
+  return kind==="video"?"VIDEO":kind==="pdf"?"PDF":"IMAGE";
+}
+function formatBytes(bytes){
+  if(!bytes)return "";
+  const units=["B","KB","MB","GB"];let i=0,n=bytes;
+  while(n>=1024&&i<units.length-1){n/=1024;i++}
+  return `${n.toFixed(i?1:0)} ${units[i]}`;
+}
+function normalizeProject(x){
+  const files=Array.isArray(x.files)&&x.files.length
+    ? x.files
+    : (x.file ? [{name:x.file.name||"Project file",kind:x.kind||fileKind(x.file),mime:x.file.type||"",file:x.file}] : []);
+  return {...x,files,thumbFile:x.thumbFile||null};
+}
+
+
+async function loadState(){
+  contentState={...DEFAULT_CONTENT,...(await kvGet("content")||{})};
+  styleState={...DEFAULT_DESIGN,...(await kvGet("design")||{})};
+  styleState.heroOutline ||= "#f4f4f2"; styleState.navText ||= "#cfcfcf"; styleState.cardText ||= styleState.text;
+  categoriesState=[...new Set([...(await kvGet("categories")||DEFAULT_CATS)])];
+}
+function fillEditor(){
+  Object.entries(contentState).forEach(([k,v])=>{const e=$("txt"+k.charAt(0).toUpperCase()+k.slice(1))||$("set"+k.charAt(0).toUpperCase()+k.slice(1));if(e)e.value=v});
+  const cMap={siteName:"setSiteName",logoText:"setLogoText",logoAccent:"setLogoAccent"};
+  Object.entries(cMap).forEach(([k,id])=>$(id).value=contentState[k]);
+  const fields={heroSize:"typHeroSize",sectionSize:"typSectionSize",bodySize:"typBodySize",heroTracking:"typTracking",lineHeight:"typLineHeight"};
+  Object.entries(fields).forEach(([k,id])=>$(id).value=styleState[k]);
+  $("typFont").value=styleState.font;$("typHeroWeight").value=styleState.heroWeight;$("typBodyWeight").value=styleState.bodyWeight;
+  const colors={bg:"colBg",panel:"colPanel",text:"colText",muted:"colMuted",accent:"colAccent",line:"colLine",heroOutline:"colHeroOutline",navText:"colNavText",cardText:"colCardText"};
+  Object.entries(colors).forEach(([k,id])=>{$(id).value=styleState[k];$(id+"Hex").textContent=styleState[k]});
+  const layouts={max:"layMax",navHeight:"layNav",gridGap:"layGap",cardRadius:"layRadius",heroTop:"layHeroTop",heroBottom:"layHeroBottom",heroWidth:"layHeroWidth",heroAlign:"layHeroAlign",sectionTop:"laySectionTop",sectionBottom:"laySectionBottom",columns:"layColumns",mobileColumns:"layMobile"};
+  Object.entries(layouts).forEach(([k,id])=>$(id).value=styleState[k]);
+  $("setShowManage").checked=contentState.showManage!==false;
+  $("setSticky").checked=contentState.sticky!==false;
+  $("heroPosition").value=styleState.heroPosition||"center center";
+  $("heroSizeMode").value=styleState.heroSizeMode||"cover";
+  $("heroOpacity").value=styleState.heroOpacity??0.92;
+  $("heroOverlay").value=styleState.heroOverlay??0.60;
+  const aboutPreview=$("aboutImagePreview");
+  if(aboutPreview){
+    if(styleState.aboutImageUrl){
+      aboutPreview.style.display="block";
+      aboutPreview.style.backgroundImage=`url("${styleState.aboutImageUrl}")`;
+    }else{
+      aboutPreview.style.display="none";
+      aboutPreview.style.backgroundImage="";
+    }
+  }
+  renderCategories();
+  renderProjectManager();
+}
+function bindInputs(){
+  const mapText={
+    setSiteName:"siteName",setLogoText:"logoText",setLogoAccent:"logoAccent",
+    txtNavHome:"navHome",txtNavWorks:"navWorks",txtNavAbout:"navAbout",txtNavContact:"navContact",
+    txtHeroEyebrow:"heroEyebrow",txtHeroHeadline:"heroHeadline",txtHeroDesc:"heroDesc",txtScroll:"scrollLabel",
+    txtWorksKicker:"worksKicker",txtWorksTitle:"worksTitle",txtWorksDesc:"worksDesc",
+    txtAboutKicker:"aboutKicker",txtAboutTitle:"aboutTitle",txtAboutMain:"aboutMain",txtAboutSecondary:"aboutSecondary",
+    txtContactKicker:"contactKicker",txtContactTitle:"contactTitle",txtContactSecond:"contactSecond",
+    txtEmail:"email",txtBehance:"behance",txtLinkedin:"linkedin",txtWhatsapp:"whatsapp",txtInstagram:"instagram",txtFacebook:"facebook",
+    txtEmailButton:"emailButton",txtWhatsappButton:"whatsappButton",txtBehanceButton:"behanceButton",txtLinkedinButton:"linkedinButton"
+  };
+  Object.entries(mapText).forEach(([id,key])=>{$(id).addEventListener("input",()=>{contentState[key]=$(id).value;applyAll()})});
+  $("setShowManage").addEventListener("change",()=>{contentState.showManage=$("setShowManage").checked;applyAll()});
+  $("setSticky").addEventListener("change",()=>{contentState.sticky=$("setSticky").checked;applyAll()});
+  const designMap={typHeroSize:"heroSize",typSectionSize:"sectionSize",typBodySize:"bodySize",typTracking:"heroTracking",typLineHeight:"lineHeight",
+    typFont:"font",typHeroWeight:"heroWeight",typBodyWeight:"bodyWeight",layMax:"maxWidth",layNav:"navHeight",layGap:"gridGap",layRadius:"cardRadius",layHeroTop:"heroTop",layHeroBottom:"heroBottom",layHeroWidth:"heroWidth",layHeroAlign:"heroAlign",laySectionTop:"sectionTop",laySectionBottom:"sectionBottom",layColumns:"columns",layMobile:"mobileColumns"};
+  Object.entries(designMap).forEach(([id,key])=>{$(id).addEventListener("input",()=>{styleState[key]=isNaN($(id).value)?$(id).value:Number($(id).value);applyAll()});$(id).addEventListener("change",()=>{styleState[key]=isNaN($(id).value)?$(id).value:Number($(id).value);applyAll()})});
+  const colorKeys={colBg:"bg",colPanel:"panel",colText:"text",colMuted:"muted",colAccent:"accent",colLine:"line",colHeroOutline:"heroOutline",colNavText:"navText",colCardText:"cardText"};
+  Object.entries(colorKeys).forEach(([id,key])=>$(id).addEventListener("input",()=>{styleState[key]=$(id).value;$(id+"Hex").textContent=$(id).value;applyAll()}));
+  document.querySelectorAll(".save-all").forEach(b=>b.onclick=saveAll);
+  $("presetDark").onclick=()=>setPalette({bg:"#070707",panel:"#101010",text:"#f4f4f2",muted:"#999999",accent:"#00F0FF",line:"#242424"});
+  $("presetLight").onclick=()=>setPalette({bg:"#f4f4ef",panel:"#ffffff",text:"#111111",muted:"#666666",accent:"#101010",line:"#d9d9d2"});
+  $("presetLime").onclick=()=>setPalette({bg:"#080808",panel:"#121212",text:"#f4f4f2",muted:"#a5a5a5",accent:"#00F0FF",line:"#292929"});
+
+  ["heroPosition","heroSizeMode","heroOpacity","heroOverlay"].forEach(id=>{
+    $(id).addEventListener("input",()=>{styleState[{heroPosition:"heroPosition",heroSizeMode:"heroSizeMode",heroOpacity:"heroOpacity",heroOverlay:"heroOverlay"}[id]]=isNaN($(id).value)?$(id).value:Number($(id).value);applyAll()});
+    $(id).addEventListener("change",()=>{styleState[{heroPosition:"heroPosition",heroSizeMode:"heroSizeMode",heroOpacity:"heroOpacity",heroOverlay:"heroOverlay"}[id]]=isNaN($(id).value)?$(id).value:Number($(id).value);applyAll()});
+  });
+  $("heroImageFile").addEventListener("change",async()=>{
+    const f=$("heroImageFile").files[0];
+    if(!f)return;
+    styleState.heroImageUrl=await heroFileToDataURL(f);
+    applyAll();
+    toast("Hero image preview updated");
+  });
+
+  $("aboutImageFile").addEventListener("change",async()=>{
+    const f=$("aboutImageFile").files[0];
+    if(!f)return;
+    styleState.aboutImageUrl=await heroFileToDataURL(f);
+    applyAboutImage();
+    const p=$("aboutImagePreview");
+    if(p){
+      p.style.display="block";
+      p.style.backgroundImage=`url("${styleState.aboutImageUrl}")`;
+    }
+    toast("About image preview updated");
+  });
+
+  $("addProject").onclick=addProject;
+  $("cancelProjectEdit").onclick=()=>{resetProjectForm();toast("Edit cancelled")};
+  $("projFiles").addEventListener("change",e=>queueProjectFiles(e.target.files));
+  $("projectSearch").addEventListener("input",()=>renderProjectManager());
+  $("projectCategoryFilter").addEventListener("change",()=>renderProjectManager());
+  $("addCategory").onclick=addCategory;
+  $("exportBackup").onclick=exportBackup;
+  $("importBackup").onchange=importBackup;
+  $("resetCustom").onclick=resetCustom;
+  $("resetSettings").onclick=resetSettings;
+  document.querySelectorAll(".side-tab").forEach(b=>b.onclick=()=>switchPanel(b.dataset.panel));
+}
+function switchPanel(key){
+  document.querySelectorAll(".side-tab").forEach(b=>b.classList.toggle("active",b.dataset.panel===key));
+  document.querySelectorAll(".editor-panel").forEach(p=>p.classList.toggle("active",p.id==="panel-"+key));
+}
+async function saveAll(){
+  await kvSet("content",contentState);await kvSet("design",styleState);await kvSet("categories",categoriesState);
+  toast("All changes saved");
+}
+function setPalette(p){styleState={...styleState,...p};fillEditor();applyAll();toast("Palette preview updated")}
+
+function heroFileToDataURL(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=()=>resolve(r.result);
+    r.onerror=reject;
+    r.readAsDataURL(file);
+  });
+}
+function applyHeroBackground(){
+  const s=styleState;
+  let ds=$("dynamicHeroStyle");
+  if(!ds){ds=document.createElement("style");ds.id="dynamicHeroStyle";document.head.appendChild(ds)}
+  const img=s.heroImageUrl||"assets/hero-photo.jpg";
+  ds.textContent=`
+    :root{
+      --hero-image:url("${img}");
+      --hero-position:${s.heroPosition||"center center"};
+      --hero-size:${s.heroSizeMode||"cover"};
+      --hero-overlay:${s.heroOverlay??0.60};
+    }
+    .hero:before{opacity:${s.heroOpacity??0.92};}
+  `;
+}
+
+function applyAboutImage(){
+  const slot=$("aboutPhotoSlot");
+  const img=$("aboutPhoto");
+  if(!slot||!img)return;
+  const src=styleState.aboutImageUrl||"";
+  if(src){
+    img.src=src;
+    slot.classList.add("has-image");
+  }else{
+    img.removeAttribute("src");
+    slot.classList.remove("has-image");
+  }
+}
+
+function cssApply(){
+  const s=styleState, root=document.documentElement;
+  applyHeroBackground();
+  root.style.setProperty("--bg",s.bg);root.style.setProperty("--panel",s.panel);root.style.setProperty("--text",s.text);root.style.setProperty("--muted",s.muted);root.style.setProperty("--accent",s.accent);root.style.setProperty("--line",s.line);root.style.setProperty("--max",s.maxWidth+"px");
+  root.style.setProperty("--hero-outline",s.heroOutline||s.text);
+  root.style.setProperty("--nav-text",s.navText||s.text);
+  root.style.setProperty("--card-text",s.cardText||s.text);
+  let ds=$("dynamicStyle");if(!ds){ds=document.createElement("style");ds.id="dynamicStyle";document.head.appendChild(ds)}
+  ds.textContent=`
+    body{font-family:${s.font};line-height:${s.lineHeight};}
+    .nav{position:${contentState.sticky===false?"absolute":"fixed"};}
+    .nav-inner{height:${s.navHeight}px;}
+    .hero{padding-top:${s.heroTop}px;padding-bottom:${s.heroBottom}px;text-align:${s.heroAlign};}
+    .hero h1{font-size:min(${s.heroSize}px,15vw);font-weight:${s.heroWeight};letter-spacing:${s.heroTracking}em;max-width:${s.heroWidth}px;}
+    .hero h1 em{-webkit-text-stroke-color:var(--hero-outline);}
+    .nav-links a{color:var(--nav-text);}
+    .card-title{color:var(--card-text);}
+    .contact-links a{transition:transform .25s,background .25s,color .25s,border-color .25s;}
+    .contact-links a:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent);}
+    
+
+
+
+
+
+    .hero-bottom p{font-size:${s.bodySize}px;font-weight:${s.bodyWeight};}
+    section{padding-top:${s.sectionTop}px;padding-bottom:${s.sectionBottom}px;}
+    .section-title{font-size:min(${s.sectionSize}px,8vw);}
+    .grid{gap:${s.gridGap}px;}
+    .card{grid-column:span ${Math.round(12/s.columns)};border-radius:${s.cardRadius}px;}
+    .card-title{font-family:${s.font};}
+    .card-body{font-size:${Math.max(13,s.bodySize-2)}px;}
+    .nav-links{font-family:${s.font};}
+    .about-grid{grid-template-columns:1.1fr .9fr;}
+    .contact p,.section-copy{font-size:${s.bodySize}px;}
+    @media(max-width:900px){.card{grid-column:span ${s.mobileColumns===1?12:6};}}
+    @media(max-width:560px){.card{grid-column:1/-1;}}
+  `;
+}
+function applyContent(){
+  const c=contentState;
+  const logo=document.querySelector(".logo");logo.innerHTML=esc(c.logoText)+" <span>"+esc(c.logoAccent)+"</span>";
+  const navs=document.querySelectorAll(".nav-links a");if(navs[0])navs[0].textContent=c.navHome;if(navs[1])navs[1].textContent=c.navWorks;if(navs[2])navs[2].textContent=c.navAbout;if(navs[3])navs[3].textContent=c.navContact;
+  const e=el=>document.querySelector(el);
+  if(e(".hero .eyebrow"))e(".hero .eyebrow").textContent=c.heroEyebrow;
+  if(e(".hero h1"))e(".hero h1").innerHTML=esc(c.heroHeadline).replace(/\n/g,"<br>");
+  if(e(".hero-bottom p"))e(".hero-bottom p").textContent=c.heroDesc;
+  if(e(".scroll"))e(".scroll").textContent=c.scrollLabel;
+  const wh=document.querySelector("#works .section-head .kicker"),wt=document.querySelector("#works .section-title"),wd=document.querySelector("#works .section-copy");
+  if(wh)wh.textContent=c.worksKicker;if(wt)wt.textContent=c.worksTitle;if(wd)wd.textContent=c.worksDesc;
+  const ah=document.querySelector("#about .section-head .kicker"),at=document.querySelector("#about .section-title"),am=document.querySelector(".about .big-copy"),as=document.querySelector(".about .muted");
+  if(ah)ah.textContent=c.aboutKicker;if(at)at.textContent=c.aboutTitle;if(am)am.textContent=c.aboutMain;if(as)as.textContent=c.aboutSecondary;
+  const ck=document.querySelector("#contact .kicker"),ch=document.querySelector("#contact h2");
+  if(ck)ck.textContent=c.contactKicker;if(ch)ch.innerHTML=esc(c.contactTitle)+"<br><span>"+esc(c.contactSecond)+"</span>";
+  renderContactLinks();
+  const manage=$("adminOpen");if(manage)manage.style.display=c.showManage===false?"none":"inline-block";
+}
+function applyAll(){cssApply();applyAboutImage();applyContent();render(currentFilter)}
+function renderContactLinks(){
+  const c=contentState, box=$("contactLinks"); if(!box)return;
+
+  const email = c.email
+    ? `<a class="contact-link-active" href="mailto:${esc(c.email)}">✉ ${esc(c.emailButton||"Email Me")}</a>`
+    : `<a class="contact-link-disabled" href="#" onclick="return false;">✉ ${esc(c.emailButton||"Email Me")}</a>`;
+
+  const behance = c.behance
+    ? `<a class="contact-link-active" href="${esc(c.behance)}" target="_blank" rel="noopener">↗ ${esc(c.behanceButton||"Behance")}</a>`
+    : `<a class="contact-link-disabled" href="#" onclick="return false;">↗ ${esc(c.behanceButton||"Behance")}</a>`;
+
+  const linkedin = c.linkedin
+    ? `<a class="contact-link-active" href="${esc(c.linkedin)}" target="_blank" rel="noopener">in ${esc(c.linkedinButton||"LinkedIn")}</a>`
+    : `<a class="contact-link-disabled" href="#" onclick="return false;" title="Add LinkedIn URL from Edit Site">in ${esc(c.linkedinButton||"LinkedIn")}</a>`;
+
+  const whatsapp = c.whatsapp
+    ? (() => {
+        const n=String(c.whatsapp).replace(/\\D/g,"");
+        return `<a class="contact-link-active" href="https://wa.me/${esc(n)}" target="_blank" rel="noopener">◉ ${esc(c.whatsappButton||"WhatsApp")}</a>`;
+      })()
+    : `<a class="contact-link-disabled" href="#" onclick="return false;" title="Add WhatsApp number from Edit Site">◉ ${esc(c.whatsappButton||"WhatsApp")}</a>`;
+
+  box.innerHTML = email + behance + linkedin + whatsapp;
+}
+
+async function projects(){
+  const u=await uploadsGet();
+  return [...BUILT_IN,...u.map(raw=>{
+    const x=normalizeProject(raw);
+    const hydratedFiles=(x.files||[]).map(f=>({
+      ...f,
+      fileURL:f.file?URL.createObjectURL(f.file):""
+    }));
+    const coverURL=x.thumbFile?URL.createObjectURL(x.thumbFile):
+      ((hydratedFiles[0]?.kind==="image")?hydratedFiles[0].fileURL:"");
+    return {...x,custom:true,files:hydratedFiles,fileURL:hydratedFiles[0]?.fileURL||"",image:coverURL||null,thumbURL:coverURL||""};
+  })];
+}
+let currentFilter="All";
+async function render(filter="All"){ currentFilter=filter;
+  const cats=categoriesState.length?categoriesState:DEFAULT_CATS,current=await projects();
+  const filters=["All",...cats];
+  $("filters").innerHTML=filters.map(x=>`<button class="filter ${x===filter?"active":""}" data-filter="${esc(x)}">${esc(x)}</button>`).join("");
+  document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>render(b.dataset.filter));
+  const shown=filter==="All"?current:current.filter(p=>p.category===filter);
+  $("workGrid").innerHTML=shown.length?shown.map((p,i)=>{
+    const type=p.files?.length>1?`${p.files.length} Files`:(p.files?.[0]?.kind||p.kind||"Project");
+    const cover=p.image||p.thumbURL||"";
+    return `<article class="card" data-index="${i}">
+      <div class="thumb">${cover?`<img src="${cover}" alt="${esc(p.title)}" loading="lazy">`:`<div style="height:100%;display:flex;align-items:center;justify-content:center;color:#666;font-size:11px">NO PREVIEW</div>`}</div>
+      <div class="card-body"><div class="card-title">${esc(p.title)}</div><div class="card-meta"><span>${esc(p.category)}</span><span>${esc(type)}</span></div></div>
+    </article>`;
+  }).join(""):`<div class="empty" style="grid-column:1/-1">No projects in this category yet.</div>`;
+  document.querySelectorAll(".card").forEach((card,i)=>card.onclick=()=>openViewer(shown[i],0));
+}
+let viewerProject=null,viewerIndex=0;
+function stopViewerMedia(){
+  document.querySelectorAll("#viewerContent video").forEach(video=>{
+    try{video.pause();video.currentTime=0;}catch(e){}
+  });
+}
+function openPdfInNewTab(p){
+  if(!p?.fileURL)return false;
+  const pdfUrl=`${p.fileURL}#toolbar=1&navpanes=0&view=FitH`;
+  const opened=window.open(pdfUrl,"_blank","noopener,noreferrer");
+  return !!opened;
+}
+function renderViewerFile(){
+  if(!viewerProject)return;
+  const files=viewerProject.files||[];
+  const p=files[viewerIndex];
+  const c=$("viewerContent"),title=$("viewerTitle");
+  stopViewerMedia();
+  if(!p){c.innerHTML=`<div class="empty">No files in this project.</div>`;return}
+  if(p.kind==="video"){
+    c.innerHTML=`<video src="${p.fileURL}" controls autoplay playsinline preload="auto"></video>`;
+  }else if(p.kind==="pdf"){
+    const opened=openPdfInNewTab(p);
+    if(opened){
+      c.innerHTML=`<div class="empty">PDF opened in a new tab.</div>`;
+    }else{
+      c.innerHTML=`<iframe src="${p.fileURL}#toolbar=1&navpanes=0&view=FitH" title="${esc(p.name||"PDF")}"></iframe>`;
+    }
+  }else{
+    c.innerHTML=`<img src="${p.fileURL}" alt="${esc(p.name||viewerProject.title)}">`;
+  }
+  title.innerHTML=`<b>${esc(viewerProject.title)}</b><small>${esc(p.name||"File")} · ${viewerIndex+1} / ${files.length}</small>`;
+  $("viewerPrev").disabled=viewerIndex<=0;
+  $("viewerNext").disabled=viewerIndex>=files.length-1;
+}
+function openViewer(p,index=0){
+  stopViewerMedia();
+  viewerProject=p;viewerIndex=Math.max(0,Math.min(index,(p.files||[]).length-1));
+  renderViewerFile();
+  if(p?.files?.[viewerIndex]?.kind==="pdf")$("viewer").classList.remove("open");
+  else $("viewer").classList.add("open");
+}
+function viewerStep(delta){
+  if(!viewerProject)return;
+  const next=viewerIndex+delta;
+  if(next<0||next>=viewerProject.files.length)return;
+  viewerIndex=next;renderViewerFile();
+}
+function fileKind(file){
+  if(!file)return "image";
+  if(file.type==="application/pdf")return "pdf";
+  if(file.type.startsWith("video/"))return "video";
+  return "image";
+}
+function fileToDataURLSafe(file){
+  return new Promise((resolve,reject)=>{
+    if(!file)return resolve("");
+    const r=new FileReader();
+    r.onload=()=>resolve(r.result);
+    r.onerror=reject;
+    r.readAsDataURL(file);
+  });
+}
+let pendingProjectFiles=[];
+
+function renderPendingFiles(){
+  const box=$("pendingFilesList");
+  const count=$("pendingFilesCount");
+  if(!box)return;
+
+  if(count){
+    count.textContent=pendingProjectFiles.length
+      ? `${pendingProjectFiles.length} file(s) queued to be added`
+      : "No new files queued yet.";
+  }
+
+  box.innerHTML=pendingProjectFiles.length
+    ? pendingProjectFiles.map((f,i)=>`<div class="project-file-row">
+        <div class="project-file-icon">${esc(fileTypeLabel(fileKind(f)))}</div>
+        <div>
+          <div class="project-file-name">${esc(f.name)}</div>
+          <div class="project-file-meta">${esc(f.type||"")} · ${formatBytes(f.size)}</div>
+        </div>
+        <div class="project-file-actions">
+          <button class="remove-file" data-remove-pending-file="${i}">Remove</button>
+        </div>
+      </div>`).join("")
+    : "";
+
+  box.querySelectorAll("[data-remove-pending-file]").forEach(b=>{
+    b.onclick=()=>{
+      pendingProjectFiles.splice(Number(b.dataset.removePendingFile),1);
+      renderPendingFiles();
+    };
+  });
+}
+
+function queueProjectFiles(fileList){
+  const incoming=Array.from(fileList||[]);
+  if(!incoming.length)return;
+
+  const existingKeys=new Set(
+    pendingProjectFiles.map(f=>`${f.name}|${f.size}|${f.lastModified}|${f.type}`)
+  );
+
+  for(const f of incoming){
+    const key=`${f.name}|${f.size}|${f.lastModified}|${f.type}`;
+    if(!existingKeys.has(key)){
+      pendingProjectFiles.push(f);
+      existingKeys.add(key);
+    }
+  }
+
+  const input=$("projFiles");
+  if(input)input.value="";
+  renderPendingFiles();
+  toast(`${incoming.length} file(s) added to queue`);
+}
+async function renderExistingFiles(id){
+  const box=$("existingFilesList"); if(!box)return;
+  if(!id){box.innerHTML="";return}
+  const p=normalizeProject((await uploadsGet()).find(x=>String(x.id)===String(id)));
+  if(!p?.files?.length){box.innerHTML=`<div class="preview-note">No existing project files.</div>`;return}
+  box.innerHTML=`<div class="builder-section-title" style="margin-top:12px">Current Project Files <span class="file-count-badge">New uploads will be appended</span></div>`+
+    p.files.map((f,i)=>`<div class="project-file-row">
+      <div class="project-file-icon">${esc(fileTypeLabel(f.kind))}</div>
+      <div><div class="project-file-name">${esc(f.name||`File ${i+1}`)}</div><div class="project-file-meta">${esc(f.mime||"")}${f.file?.size?` · ${formatBytes(f.file.size)}`:""}</div></div>
+      <div class="project-file-actions"><button class="remove-file" data-remove-project-file="${i}">Delete</button></div>
+    </div>`).join("");
+  box.querySelectorAll("[data-remove-project-file]").forEach(b=>b.onclick=async()=>{
+    const index=Number(b.dataset.removeProjectFile);
+    const current=normalizeProject((await uploadsGet()).find(x=>String(x.id)===String(id)));
+    if(!current)return;
+    if(!confirm(`Delete "${current.files[index]?.name||"this file"}" from the project?`))return;
+    current.files.splice(index,1);
+    current.file=current.files[0]?.file||null;
+    current.kind=current.files[0]?.kind||"image";
+    await uploadsPut(current);
+    await renderExistingFiles(id);
+    await renderProjectManager();
+    render();
+    toast("Project file deleted");
+  });
+}
+async function addProject(){
+  const title=$("projTitle").value.trim();
+  const cat=$("projCategory").value;
+  const desc=$("projDesc").value.trim();
+  const role=$("projRole").value.trim();
+  const process=$("projProcess").value.trim();
+  const newFiles=[...pendingProjectFiles];
+  const thumb=$("projThumb").files[0];
+
+  if(!title){toast("Add a project name");return}
+  const editingId=$("editingProjectId").value;
+
+  if(editingId){
+    const existing=normalizeProject((await uploadsGet()).find(x=>String(x.id)===String(editingId)));
+    if(!existing){resetProjectForm();toast("Project not found");return}
+
+    existing.title=title;existing.category=cat;existing.desc=desc;existing.role=role;existing.process=process;
+    if(newFiles.length){
+      existing.files=[...(existing.files||[]),...newFiles.map(file=>({name:file.name,mime:file.type,kind:fileKind(file),file}))];
+    }
+    if(thumb){existing.thumbFile=thumb;existing.thumbURL="";}
+    existing.file=existing.files?.[0]?.file||null;
+    existing.kind=existing.files?.[0]?.kind||"image";
+    existing.fileURL="";
+    await uploadsPut(existing);
+    resetProjectForm();
+    toast("Project updated");
+  }else{
+    if(!newFiles.length){toast("Add at least one project file");return}
+    const files=newFiles.map(file=>({name:file.name,mime:file.type,kind:fileKind(file),file}));
+    await uploadsAdd({
+      title,category:cat,desc,role,process,
+      kind:files[0].kind,
+      file:files[0].file,
+      fileURL:"",
+      files,
+      thumbFile:thumb||null,
+      thumbURL:""
+    });
+    resetProjectForm();
+    toast("Project added");
+  }
+
+  await renderProjectManager();
+  render();
+}
+async function startProjectEdit(id){
+  pendingProjectFiles=[];
+  renderPendingFiles();
+  const p=normalizeProject((await uploadsGet()).find(x=>Number(x.id)===Number(id)));
+  if(!p){toast("Project not found");return}
+  $("editingProjectId").value=p.id;
+  $("projTitle").value=p.title||"";
+  $("projCategory").value=p.category||categoriesState[0]||"";
+  $("projDesc").value=p.desc||"";
+  $("projRole").value=p.role||"";
+  $("projProcess").value=p.process||"";
+  $("projFiles").value="";
+  $("projThumb").value="";
+  $("projectFormTitle").textContent="Edit Project";
+  $("addProject").textContent="Save Project Changes";
+  $("cancelProjectEdit").style.display="inline-flex";
+  $("projFileHint")?.remove?.();
+  switchPanel("projects");
+  await renderExistingFiles(p.id);
+  const form=$("projectFormTitle");if(form)form.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function resetProjectForm(){
+  pendingProjectFiles=[];
+  $("editingProjectId").value="";
+  ["projTitle","projDesc","projRole","projProcess","projFiles","projThumb"].forEach(id=>$(id).value="");
+  if(categoriesState[0])$("projCategory").value=categoriesState[0];
+  $("projectFormTitle").textContent="Add Project";
+  $("addProject").textContent="＋ Add Project";
+  $("cancelProjectEdit").style.display="none";
+  $("pendingFilesList").innerHTML="";
+  $("existingFilesList").innerHTML="";
+}
+async function deleteProject(id){
+  const p=normalizeProject((await uploadsGet()).find(x=>Number(x.id)===Number(id)));
+  if(!p)return;
+  if(!confirm(`Delete "${p.title}" from your portfolio?`))return;
+  await uploadsDelete(Number(id));
+  if(String($("editingProjectId").value)===String(id))resetProjectForm();
+  toast("Project deleted");
+  await renderProjectManager();
+  render();
+}
+async function renderProjectManager(){
+  const list=$("projectManagerList");
+  if(!list)return;
+  const all=await uploadsGet();
+  const q=($("projectSearch")?.value||"").trim().toLowerCase();
+  const filter=$("projectCategoryFilter")?.value||"All";
+  const visible=all.filter(p=>{
+    const hay=[p.title,p.category,p.desc,p.role,p.process].join(" ").toLowerCase();
+    return (!q||hay.includes(q)) && (filter==="All"||p.category===filter);
+  });
+
+  list.innerHTML=visible.length?visible.map(raw=>{
+    const x=normalizeProject(raw);
+    const thumb=x.thumbFile?(URL.createObjectURL(x.thumbFile)):
+      ((x.files?.[0]?.kind==="image"&&x.files[0].file)?URL.createObjectURL(x.files[0].file):"");
+    return `<div class="pm-row">
+      <div class="pm-thumb">${thumb?`<img src="${thumb}" alt="">`:""}</div>
+      <div class="pm-copy">
+        <b>${esc(x.title)}</b>
+        <small>${esc(x.category||"Uncategorized")} · ${esc(x.kind||x.type||"Project")}${x.role?` · ${esc(x.role)}`:""}</small>
+      </div>
+      <div class="pm-actions">
+        <button class="edit-project" data-edit-project="${x.id}">Edit</button>
+        <button class="delete-project" data-del-project="${x.id}">Delete</button>
+      </div>
+    </div>`;
+  }).join(""):`<div class="empty">${all.length?"No projects match your search.":"No projects yet — add your first project above."}</div>`;
+
+  list.querySelectorAll("[data-edit-project]").forEach(b=>b.onclick=()=>startProjectEdit(b.dataset.editProject));
+  list.querySelectorAll("[data-del-project]").forEach(b=>b.onclick=()=>deleteProject(b.dataset.delProject));
+
+  const catFilter=$("projectCategoryFilter");
+  if(catFilter){
+    const current=catFilter.value||"All";
+    catFilter.innerHTML=`<option value="All">All categories</option>`+
+      categoriesState.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
+    catFilter.value=categoriesState.includes(current)?current:"All";
+  }
+}
+async function renderCategories(){
+  const cats=categoriesState.length?categoriesState:DEFAULT_CATS;
+  const prevProjectCat=$("projCategory")?.value||"";
+  $("projCategory").innerHTML=cats.map(c=>`<option>${esc(c)}</option>`).join("");
+  $("projCategory").value=cats.includes(prevProjectCat)?prevProjectCat:(cats[0]||"");
+  const prevFilter=$("projectCategoryFilter")?.value||"All";
+  $("projectCategoryFilter").innerHTML=`<option value="All">All categories</option>`+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
+  $("projectCategoryFilter").value=(prevFilter==="All"||cats.includes(prevFilter))?prevFilter:"All";
+  $("categoryManagerList").innerHTML=cats.map((c,i)=>`<div class="cat-row"><span>${esc(c)}</span><button class="danger" data-cat="${i}">Delete</button></div>`).join("");
+  document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=async()=>{const i=Number(b.dataset.cat),name=cats[i];if(cats.length<=1){toast("Keep at least one category");return}if(confirm("Delete category '"+name+"'? Existing projects keep their old category.")){categoriesState.splice(i,1);await kvSet("categories",categoriesState);renderCategories();renderProjectManager();render();}});
+}
+async function addCategory(){
+  const n=$("newCategory").value.trim();if(!n)return;
+  if(categoriesState.some(x=>x.toLowerCase()===n.toLowerCase())){toast("Category already exists");return}
+  categoriesState.push(n);$("newCategory").value="";await kvSet("categories",categoriesState);renderCategories();renderProjectManager();render();toast("Category added");
+}
+async function setDefaultsAndSave(){await kvSet("content",contentState);await kvSet("design",styleState);await kvSet("categories",categoriesState)}
+async function exportBackup(){
+  const uploads=await uploadsGet();
+  const data={version:3,content:contentState,design:styleState,categories:categoriesState,projects:[]};
+  for(const raw of uploads){
+    const p=normalizeProject(raw);
+    const fileData=[];
+    for(const f of (p.files||[])){
+      fileData.push({name:f.name||f.file?.name||"Project file",mime:f.mime||f.file?.type||"",kind:f.kind||fileKind(f.file),data:f.file?await fileToData(f.file):null});
+    }
+    data.projects.push({
+      title:p.title,category:p.category,desc:p.desc,role:p.role,process:p.process,
+      files:fileData,
+      thumbName:p.thumbFile?.name||"",thumbMime:p.thumbFile?.type||"",
+      thumbData:p.thumbFile?await fileToData(p.thumbFile):null
+    });
+  }
+  const blob=new Blob([JSON.stringify(data)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="mohamed-rady-portfolio-full-backup.json";a.click();toast("Backup exported");
+}
+function fileToData(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)})}
+function dataToFile(data,name,mime){const [meta,b64]=data.split(","),bin=atob(b64),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new File([u],name,{type:mime||meta.match(/:(.*?);/)[1]})}
+async function importBackup(ev){
+  const f=ev.target.files[0];if(!f)return;
+  try{
+    const d=JSON.parse(await f.text());
+    if(d.content)contentState={...DEFAULT_CONTENT,...d.content};
+    if(d.design)styleState={...DEFAULT_DESIGN,...d.design};
+    if(Array.isArray(d.categories))categoriesState=d.categories;
+    await kvSet("content",contentState);await kvSet("design",styleState);await kvSet("categories",categoriesState);
+    for(const p of (d.projects||[])){
+      const files=Array.isArray(p.files)&&p.files.length
+        ? p.files.map(f=>({name:f.name,mime:f.mime,kind:f.kind||"image",file:f.data?dataToFile(f.data,f.name,f.mime):null})).filter(f=>f.file)
+        : (p.fileData?[{name:p.name,mime:p.mime,kind:p.kind||"image",file:dataToFile(p.fileData,p.name,p.mime)}]:[]);
+      if(files.length){
+        const thumbFile=p.thumbData?dataToFile(p.thumbData,p.thumbName,p.thumbMime):null;
+        await uploadsAdd({
+          title:p.title,category:p.category,desc:p.desc,role:p.role,process:p.process,
+          kind:files[0].kind,file:files[0].file,fileURL:"",files,thumbFile,thumbURL:""
+        });
+      }
+    }
+    fillEditor();applyAll();renderProjectManager();toast("Backup imported");ev.target.value="";
+  }catch(e){console.error(e);toast("Backup import failed")}
+}
+async function resetCustom(){if(!confirm("Delete all added projects?"))return;for(const x of await uploadsGet())await uploadsDelete(x.id);toast("Added projects deleted");resetProjectForm();renderProjectManager();render()}
+async function resetSettings(){if(!confirm("Reset design and text settings to defaults?"))return;contentState={...DEFAULT_CONTENT};styleState={...DEFAULT_DESIGN};await setDefaultsAndSave();fillEditor();applyAll();toast("Settings reset")}
+function bindUI(){
+  $("adminOpen").onclick=()=>{$("adminModal").classList.add("open");fillEditor()};
+  $("adminClose").onclick=()=>$("adminModal").classList.remove("open");
+  $("viewerClose").onclick=()=>{stopViewerMedia();$("viewerContent").innerHTML="";$("viewer").classList.remove("open");viewerProject=null;viewerIndex=0};
+  $("viewerPrev").onclick=()=>viewerStep(-1);
+  $("viewerNext").onclick=()=>viewerStep(1);
+  bindInputs();
+}
+async function initAll(){
+  await loadState();bindUI();fillEditor();applyAll();
+}
+$("year").textContent=new Date().getFullYear();
+</script>
+
+
+</body>
+</html>
