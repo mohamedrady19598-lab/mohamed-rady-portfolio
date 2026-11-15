@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mohamed Rady — Admin</title>
+<style>
+:root{--bg:#070707;--panel:#101010;--line:#262626;--text:#f4f4f2;--muted:#8d8d8d;--accent:#45dde8;--danger:#ff7b7b}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+button,input,textarea,select{font:inherit} button{cursor:pointer}
+.wrap{max-width:1440px;margin:auto;padding:28px}.top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:24px}
+.brand{font-weight:900;letter-spacing:.08em}.brand span{color:var(--accent)} .muted{color:var(--muted);font-size:12px}
+.btn{border:1px solid #333;background:#141414;color:#eee;padding:10px 14px;border-radius:9px}.btn.primary{background:var(--accent);color:#061113;border-color:var(--accent);font-weight:800}.btn.danger{color:var(--danger);border-color:#4a2929}
+.login{max-width:460px;margin:10vh auto;padding:24px;border:1px solid var(--line);background:var(--panel);border-radius:16px}
+.login h1{margin:0 0 8px}.field{display:grid;gap:7px;margin:14px 0}.field label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+input,textarea,select{width:100%;background:#090909;color:#eee;border:1px solid #303030;border-radius:8px;padding:11px} textarea{min-height:100px;resize:vertical}
+.app{display:none}.layout{display:grid;grid-template-columns:230px 1fr;gap:18px}.nav{position:sticky;top:20px;height:max-content;display:grid;gap:7px}
+.nav button{text-align:left}.nav button.active{background:#eee;color:#080808}
+.panel{display:none}.panel.active{display:block}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.card h2,.card h3{margin:0 0 12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}
+.list{display:grid;gap:10px}.item{display:grid;grid-template-columns:88px 1fr auto;gap:12px;align-items:center;border:1px solid #252525;background:#0b0b0b;padding:10px;border-radius:10px}
+.thumb{width:88px;height:58px;background:#161616;border-radius:7px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#666;font-size:10px}.thumb img{width:100%;height:100%;object-fit:cover}
+.small{font-size:11px;color:var(--muted)} .status{padding:8px 11px;border:1px solid #2b2b2b;border-radius:999px;font-size:11px;color:#aaa}
+.toolbar{position:sticky;top:0;z-index:5;background:rgba(7,7,7,.92);backdrop-filter:blur(10px);padding:10px 0 14px;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.notice{padding:10px 12px;border:1px solid #2b3940;background:#0c1518;border-radius:9px;color:#bfefff;font-size:12px}
+.upload-card{margin-top:18px;padding:20px;border:1px dashed #45dde8;border-radius:14px;background:#0b1a1c;display:grid;gap:12px}
+.upload-card h3{margin:0;color:#d8fbff}.upload-card p{margin:0;color:#9bc3c8;font-size:12px;line-height:1.6}
+.upload-drop{display:flex;align-items:center;justify-content:center;min-height:116px;border:1px dashed #49747a;border-radius:10px;text-align:center;cursor:pointer;background:#101f21;padding:16px;font-weight:700;color:#45dde8}
+.upload-drop:hover{background:#172c30}.upload-drop input{display:none}
+.upload-status{font-size:12px;color:#bfefff;white-space:pre-line;overflow-wrap:anywhere}
+.jsonbox{min-height:520px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.nav{position:static;grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}.item{grid-template-columns:64px 1fr}.item>div:last-child{grid-column:2}.thumb{width:64px;height:44px}}
+</style>
+</head>
+<body>
+<div id="loginView" class="login">
+  <div class="brand">MOHAMED <span>RADY</span></div>
+  <h1>Admin Login</h1>
+  <div class="muted">Private content manager for mohammedrady.com</div>
+  <div class="field"><label>Email</label><input id="email" type="email" autocomplete="username"></div>
+  <div class="field"><label>Password</label><input id="password" type="password" autocomplete="current-password"></div>
+  <button id="loginBtn" class="btn primary" style="width:100%">Login</button>
+  <div id="loginMsg" class="small" style="margin-top:10px"></div>
+</div>
+
+<div id="appView" class="app">
+<div class="wrap">
+  <div class="top">
+    <div><div class="brand">MOHAMED <span>RADY</span> ADMIN</div><div class="muted">Content, projects, clients, design and future fields.</div></div>
+    <div class="row"><span id="saveState" class="status">Not saved</span><button id="logoutBtn" class="btn">Logout</button></div>
+  </div>
+
+  <div class="layout">
+    <aside class="nav" id="nav">
+      <button class="btn active" data-panel="general">General</button>
+      <button class="btn" data-panel="hero">Hero</button>
+      <button class="btn" data-panel="projects">Projects</button>
+      <button class="btn" data-panel="clients">Clients</button>
+      <button class="btn" data-panel="about">About</button>
+      <button class="btn" data-panel="contact">Contact</button>
+      <button class="btn" data-panel="design">Design</button>
+      <button class="btn" data-panel="mobile">Mobile</button>
+      <button class="btn" data-panel="json">Advanced JSON</button>
+    </aside>
+
+    <main>
+      <div class="toolbar">
+        <div class="small">Changes are saved to Supabase and appear on the live site without a deploy.</div>
+        <div class="row"><button id="reloadBtn" class="btn">Reload</button><button id="saveBtn" class="btn primary">Save All Changes</button></div>
+      </div>
+
+      <section class="panel active" id="panel-general">
+        <div class="card"><h2>General</h2><div class="grid2">
+          <div class="field"><label>Site Name</label><input data-path="content.siteName"></div>
+          <div class="field"><label>Logo Text</label><input data-path="content.logoText"></div>
+          <div class="field"><label>Logo Accent</label><input data-path="content.logoAccent"></div>
+          <div class="field"><label>Works Title</label><input data-path="content.worksTitle"></div>
+          <div class="field"><label>Works Kicker</label><input data-path="content.worksKicker"></div>
+          <div class="field"><label>Works Description</label><textarea data-path="content.worksDesc"></textarea></div>
+        </div></div>
+        <div class="card"><h3>Categories</h3><div id="categoriesList" class="list"></div><button id="addCategory" class="btn">+ Add Category</button></div>
+      </section>
+
+      <section class="panel" id="panel-hero">
+        <div class="card"><h2>Hero</h2><div class="grid2">
+          <div class="field"><label>Eyebrow</label><input data-path="content.heroEyebrow"></div>
+          <div class="field"><label>Headline</label><input data-path="content.heroHeadline"></div>
+          <div class="field"><label>Description</label><textarea data-path="content.heroDesc"></textarea></div>
+          <div class="field"><label>Hero Image URL</label><input data-path="design.heroImageUrl"></div>
+          <div class="field"><label>Position</label><input data-path="design.heroPosition"></div>
+          <div class="field"><label>Size Mode</label><select data-path="design.heroSizeMode"><option>cover</option><option>contain</option></select></div>
+          <div class="field"><label>Overlay 0–1</label><input type="number" step=".05" min="0" max="1" data-path="design.heroOverlay"></div>
+          <div class="field"><label>Upload New Hero</label><input id="heroUpload" type="file" accept="image/*"></div>
+        </div></div>
+      </section>
+
+      <section class="panel" id="panel-projects">
+        <div class="card">
+          <div class="row between"><div><h2>Projects</h2><div class="small">Add, edit, reorder, hide or delete projects.</div></div><button id="addProject" class="btn primary">+ Add Project</button></div>
+          <div id="projectsList" class="list" style="margin-top:14px"></div>
+        </div>
+        <div id="projectEditor" class="card" style="display:none"></div>
+      </section>
+
+      <section class="panel" id="panel-clients">
+        <div class="card">
+          <div class="row between"><div><h2>Clients</h2><div class="small">Manage logos and order.</div></div><button id="addClient" class="btn primary">+ Add Client</button></div>
+          <div id="clientsList" class="list" style="margin-top:14px"></div>
+        </div>
+        <div id="clientEditor" class="card" style="display:none"></div>
+      </section>
+
+      <section class="panel" id="panel-about">
+        <div class="card"><h2>About</h2><div class="grid2">
+          <div class="field"><label>Kicker</label><input data-path="content.aboutKicker"></div>
+          <div class="field"><label>Title</label><input data-path="content.aboutTitle"></div>
+          <div class="field"><label>Main Copy</label><textarea data-path="content.aboutMain"></textarea></div>
+          <div class="field"><label>Secondary Copy</label><textarea data-path="content.aboutSecondary"></textarea></div>
+          <div class="field"><label>Courses</label><textarea data-path="content.coursesText"></textarea></div>
+          <div class="field"><label>Skills</label><textarea data-path="content.skillsText"></textarea></div>
+          <div class="field"><label>About Image URL</label><input data-path="design.aboutImageUrl"></div>
+          <div class="field"><label>Upload About Image</label><input id="aboutUpload" type="file" accept="image/*"></div>
+        </div></div>
+        <div class="card"><h3>Experience</h3><div id="experienceList" class="list"></div><button id="addExperience" class="btn">+ Add Experience</button></div>
+      </section>
+
+      <section class="panel" id="panel-contact">
+        <div class="card"><h2>Contact & Social</h2><div class="grid2">
+          <div class="field"><label>Email</label><input data-path="content.email"></div>
+          <div class="field"><label>Phone</label><input data-path="content.phone"></div>
+          <div class="field"><label>WhatsApp</label><input data-path="content.whatsapp"></div>
+          <div class="field"><label>Behance</label><input data-path="content.behance"></div>
+          <div class="field"><label>LinkedIn</label><input data-path="content.linkedin"></div>
+          <div class="field"><label>Instagram</label><input data-path="content.instagram"></div>
+          <div class="field"><label>Facebook</label><input data-path="content.facebook"></div>
+          <div class="field"><label>Contact Kicker</label><input data-path="content.contactKicker"></div>
+          <div class="field"><label>Contact Title</label><input data-path="content.contactTitle"></div>
+          <div class="field"><label>Contact Second Line</label><input data-path="content.contactSecond"></div>
+        </div></div>
+      </section>
+
+      <section class="panel" id="panel-design">
+        <div class="card"><h2>Desktop Design</h2><div class="grid3">
+          <div class="field"><label>Background</label><input type="color" data-path="design.bg"></div>
+          <div class="field"><label>Text</label><input type="color" data-path="design.text"></div>
+          <div class="field"><label>Accent</label><input type="color" data-path="design.accent"></div>
+          <div class="field"><label>Panel</label><input type="color" data-path="design.panel"></div>
+          <div class="field"><label>Muted</label><input type="color" data-path="design.muted"></div>
+          <div class="field"><label>Line</label><input type="color" data-path="design.line"></div>
+          <div class="field"><label>Max Width</label><input type="number" data-path="design.maxWidth"></div>
+          <div class="field"><label>Columns</label><input type="number" data-path="design.columns"></div>
+          <div class="field"><label>Grid Gap</label><input type="number" data-path="design.gridGap"></div>
+          <div class="field"><label>Card Radius</label><input type="number" data-path="design.cardRadius"></div>
+          <div class="field"><label>Hero Size</label><input type="number" data-path="design.heroSize"></div>
+          <div class="field"><label>Section Title Size</label><input type="number" data-path="design.sectionSize"></div>
+        </div></div>
+      </section>
+
+      <section class="panel" id="panel-mobile">
+        <div class="card"><h2>Mobile Design</h2><div class="grid3">
+          <div class="field"><label>Project Columns</label><input type="number" data-path="design.mobile.projectColumns"></div>
+          <div class="field"><label>Max Projects</label><input type="number" data-path="design.mobile.maxProjects"></div>
+          <div class="field"><label>Hero Size</label><input type="number" data-path="design.mobile.heroSize"></div>
+          <div class="field"><label>Section Size</label><input type="number" data-path="design.mobile.sectionSize"></div>
+          <div class="field"><label>Page Padding</label><input type="number" data-path="design.mobile.pagePadding"></div>
+          <div class="field"><label>Card Image Height</label><input type="number" data-path="design.mobile.cardImageHeight"></div>
+          <div class="field"><label>Hero Image URL</label><input data-path="design.mobile.heroImageUrl"></div>
+          <div class="field"><label>Hero Position</label><input data-path="design.mobile.heroPosition"></div>
+          <div class="field"><label>Hero Overlay</label><input type="number" step=".05" min="0" max="1" data-path="design.mobile.heroOverlay"></div>
+        </div></div>
+      </section>
+
+      <section class="panel" id="panel-json">
+        <div class="card">
+          <h2>Advanced JSON</h2>
+          <div class="notice">This is the full site database. It gives you future-proof control over fields not yet shown in the visual editor. Save a backup before major edits.</div>
+          <div class="row" style="margin:12px 0"><button id="exportBtn" class="btn">Export Backup</button><label class="btn">Import Backup<input id="importInput" type="file" accept=".json,application/json" hidden></label></div>
+          <textarea id="jsonEditor" class="jsonbox"></textarea>
+          <button id="applyJson" class="btn">Apply JSON to Editor</button>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
+<script>
+let sb=null, state=null, projectIndex=-1, clientIndex=-1;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const clone=x=>JSON.parse(JSON.stringify(x));
+function previewUrl(u){
+  u = String(u || "").trim();
+  if(!u) return "";
+  if(/^https?:\/\//i.test(u) || u.startsWith("data:") || u.startsWith("blob:")) return u;
+  return "/" + u.replace(/^\.\//,"").replace(/^\//,"");
+}
+
+
+function adminAsset(u){
+  u = String(u || "").trim();
+  if(!u) return "";
+  if(/^https?:\/\//i.test(u) || u.startsWith("data:") || u.startsWith("blob:")) return u;
+  return "/" + u.replace(/^\.\//,"").replace(/^\//,"");
+}
+
+function adminProjectThumb(p){
+  const title = String(p?.title || "").trim();
+  const upper = title.toUpperCase();
+
+  // نفس الـthumbnails النهائية اللي ظبطناها في الموقع
+  if(upper === "ESM")
+    return "/assets/Images/TH copy.webp";
+
+  if(upper === "MIX TV")
+    return "/assets/Images/1 copy 2.png";
+
+  if(upper.includes("SELAH"))
+    return "/assets/Images/1 copy.png";
+
+  if(upper === "SEIF")
+    return "/assets/Images/seif-thumb.jpg";
+
+  if(title === "Key Visuals")
+    return "/assets/Images/key-visuals-thumb.png";
+
+  if(title === "Social Media Grids")
+    return "/assets/Images/social-media-grids-thumb.jpg";
+
+  if(upper === "ALRAEY")
+    return "/assets/Images/alraey-thumb.jpg";
+
+  // لو المشروع ليه URL أو Path واضح
+  const direct = p?.thumb?.url || p?.thumb?.path || "";
+  if(direct) return adminAsset(direct);
+
+  // باقي المشاريع: الصور موجودة داخل assets/Images بالاسم الأصلي
+  const name = String(p?.thumb?.name || "").trim();
+  if(name) return adminAsset("assets/Images/" + name);
+
+  return "";
+}
+
+function getPath(o,path){return path.split(".").reduce((a,k)=>a?.[k],o)}
+function setPath(o,path,val){const ks=path.split(".");let a=o;ks.slice(0,-1).forEach(k=>{if(!a[k]||typeof a[k]!=="object")a[k]={};a=a[k]});a[ks.at(-1)]=val}
+function markDirty(){ $("saveState").textContent="Unsaved changes"; $("saveState").style.color="#ffd88d"; refreshJson(); }
+function cfgReady(){const c=window.SUPABASE_CONFIG||{};return c.url&&c.anonKey&&!/PASTE_/.test(c.url+c.anonKey)}
+async function initClient(){
+  if(!cfgReady()){ $("loginMsg").textContent="Open config.js and paste your Supabase URL + anon key first."; return false; }
+  sb=window.supabase.createClient(window.SUPABASE_CONFIG.url,window.SUPABASE_CONFIG.anonKey);
+  const {data:{session}}=await sb.auth.getSession();
+  if(session) await showApp(); else $("loginView").style.display="block";
+  sb.auth.onAuthStateChange((_e,s)=>{ if(!s){$("appView").style.display="none";$("loginView").style.display="block"} });
+  return true;
+}
+$("loginBtn").onclick=async()=>{ if(!sb && !(await initClient()))return; $("loginMsg").textContent="Signing in…"; const {error}=await sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value}); if(error){$("loginMsg").textContent=error.message;return} await showApp(); };
+$("logoutBtn").onclick=()=>sb.auth.signOut();
+async function showApp(){ $("loginView").style.display="none";$("appView").style.display="block"; await loadState(); }
+async function loadState(){
+  const {data,error}=await sb.from("site_state").select("data").eq("id",1).single();
+  if(error){alert(error.message);return}
+  state=clone(data.data); bindFields(); renderAll(); $("saveState").textContent="Loaded"; $("saveState").style.color="#aaa";
+}
+function bindFields(){
+  document.querySelectorAll("[data-path]").forEach(el=>{
+    const v=getPath(state,el.dataset.path);
+    if(el.type==="checkbox") el.checked=!!v;
+    else el.value=v??"";
+    el.oninput=()=>{
+      let val=el.type==="number"?Number(el.value):el.value;
+      if(el.type==="checkbox") val=el.checked;
+      setPath(state,el.dataset.path,val); markDirty();
+    };
+  });
+}
+function refreshJson(){ if($("jsonEditor") && document.activeElement!==$("jsonEditor")) $("jsonEditor").value=JSON.stringify(state,null,2); }
+function renderAll(){ renderCategories();renderProjects();renderClients();renderExperience();refreshJson(); }
+async function saveAll(){
+  try{
+    if(document.activeElement===$("jsonEditor")) {
+      try{ state=JSON.parse($("jsonEditor").value); bindFields(); renderAll(); }catch(e){}
+    }
+    $("saveState").textContent="Saving…";
+    const {error}=await sb.from("site_state").update({data:state,updated_at:new Date().toISOString()}).eq("id",1);
+    if(error) throw error;
+    $("saveState").textContent="Saved ✓";$("saveState").style.color="#a7ffb0";
+  }catch(e){$("saveState").textContent="Save failed";$("saveState").style.color="#ff8b8b";alert(e.message)}
+}
+$("saveBtn").onclick=saveAll;$("reloadBtn").onclick=()=>confirm("Discard unsaved changes and reload?")&&loadState();
+
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("#nav button").forEach(x=>x.classList.toggle("active",x===b));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id==="panel-"+b.dataset.panel));
+});
+
+function renderCategories(){
+  const box=$("categoriesList"); box.innerHTML=(state.categories||[]).map((x,i)=>`<div class="item" style="grid-template-columns:1fr auto"><input value="${esc(x)}" data-cat="${i}"><button class="btn danger" data-delcat="${i}">Delete</button></div>`).join("");
+  box.querySelectorAll("[data-cat]").forEach(i=>i.oninput=()=>{state.categories[+i.dataset.cat]=i.value;markDirty()});
+  box.querySelectorAll("[data-delcat]").forEach(b=>b.onclick=()=>{state.categories.splice(+b.dataset.delcat,1);renderCategories();markDirty()});
+}
+$("addCategory").onclick=()=>{state.categories=state.categories||[];state.categories.push("New Category");renderCategories();markDirty()};
+
+
+const ADMIN_THUMB_MAP = {
+  "ARCHIDEO VIDEOS": "Videos/Archideo/Thumbnail Arch.webp",
+  "ESM": "assets/Images/TH copy.webp",
+  "MIX TV": "assets/Images/1 copy 2.png",
+  "DAMAN CRYPTO": "PDF/Daman Crypto/Th DC.webp",
+  "SN AUTOMATIVE": "PDF/Presnetation/SN.webp",
+  "MYCO PROFILE": "PDF/Presnetation/Mycoo.webp",
+  "SEVEN": "PDF/Presnetation/7 Seven.webp",
+  "MYCO PLATFORM": "Videos/Th.png",
+  "INDRIVE": "PDF/Creative Direction Indrive/Men_shaking_hands_near_car_202608072113.jpeg",
+  "FWC 2026": "Videos/Fifa.webp",
+  "KAFFA": "PDF/Kaffa/Kaffa-1 copy.webp",
+  "MOYS": "PDF/Ministry/Ministry.webp",
+  "FUTURE TOURISM": "PDF/Future/f-01.webp",
+  "MIDNIGHT": "PDF/Midnight/23.jpg",
+  "TRIPLE AD": "PDF/16.jpg",
+  "HAWAA BOOK": "Videos/1.png",
+  "AYN": "PDF/Ayn/Ayn Guidlines-1.webp",
+  "NOOR": "PDF/Noor/Poster2.png",
+  "SELAH ALTELMEEZ": "assets/Images/1 copy.png",
+  "SKY DREAMS": "PDF/Sky Dreams/Poster.png",
+  "ART HOUSE": "PDF/7.png",
+  "CHERRY&BERRY": "PDF/Cherry and berry/1.jpg",
+  "EALANAT SARCASM": "Videos/123123.png",
+  "SEIF": "Seif Branding/1.jpg",
+  "KHDA": "PDF/Th.webp",
+  "KHDA V2": "PDF/Th2.webp",
+  "BAIT ALAJWAD": "PDF/Bait Alajwad/12.jpg",
+  "KEY VISUALS": "Key Visual/poster 3 copy.webp",
+  "SOCIAL MEDIA GRIDS": "Social Media/18.png",
+  "ALRAEY": "Alraey/11.png"
+};
+
+function rootAsset(path){
+  path = String(path || "").trim();
+  if(!path) return "";
+  if(/^https?:\/\//i.test(path) || path.startsWith("data:") || path.startsWith("blob:")) return path;
+  return "/" + path.replace(/^\.\//,"").replace(/^\/+/,"");
+}
+
+function adminProjectThumb(p){
+  const title = String(p?.title || "").trim().toUpperCase();
+  const mapped = ADMIN_THUMB_MAP[title];
+  if(mapped) return rootAsset(mapped);
+
+  const direct = p?.thumb?.url || p?.thumb?.path || "";
+  if(direct) return rootAsset(direct);
+
+  const name = String(p?.thumb?.name || "").trim();
+  if(name) return rootAsset("assets/Images/" + name);
+
+  return "";
+}
+
+function adminClientLogo(c){
+  return rootAsset(c?.image || "");
+}
+
+
+/* === TRUE FINAL IMAGE RESOLVER === */
+function adminRootAsset(path){
+  path = String(path || "").trim();
+  if(!path) return "";
+
+  if(
+    /^https?:\/\//i.test(path) ||
+    path.startsWith("data:") ||
+    path.startsWith("blob:")
+  ){
+    return path;
+  }
+
+  return "/" + path
+    .replace(/^\.\//,"")
+    .replace(/^\/+/,"");
+}
+
+function adminProjectThumb(project){
+  const direct =
+    project?.thumb?.url ||
+    project?.thumb?.path ||
+    "";
+
+  // أي Upload جديد من Supabase ياخد الأولوية
+  if(/^https?:\/\//i.test(String(direct || ""))){
+    return String(direct);
+  }
+
+  const title = String(project?.title || "").trim();
+  const upper = title.toUpperCase();
+
+  // الصور القديمة مجرد fallback
+  if(upper === "MIX TV")
+    return "/assets/Images/1 copy 2.png";
+
+  if(upper.includes("SELAH"))
+    return "/assets/Images/1 copy.png";
+
+  if(upper === "ESM")
+    return "/assets/Images/TH copy.webp";
+
+  if(upper === "SEIF")
+    return "/assets/Images/seif-thumb.jpg";
+
+  if(title === "Key Visuals")
+    return "/assets/Images/key-visuals-thumb.png";
+
+  if(title === "Social Media Grids")
+    return "/assets/Images/social-media-grids-thumb.jpg";
+
+  if(upper === "ALRAEY")
+    return "/assets/Images/alraey-thumb.jpg";
+
+  if(direct)
+    return adminRootAsset(direct);
+
+  const name = String(project?.thumb?.name || "").trim();
+  if(name)
+    return "/assets/Images/" + name;
+
+  return "";
+}
+
+function adminClientLogo(client){
+  return adminRootAsset(client?.image || "");
+}
+
+function renderProjects(){
+  const list=$("projectsList"), arr=state.projects||[];
+  list.innerHTML=arr.map((p,i)=>`<div class="item">
+    <div class="thumb">${p.thumb?.url||p.thumb?.path||p.thumb?.name?`<img src="${esc(adminProjectThumb(p))}">`:"NO IMAGE"}</div>
+    <div><b>${esc(p.title||"Untitled")}</b><div class="small">${esc(p.category||"")} · ${(p.files||[]).length} file(s)</div></div>
+    <div class="row"><button class="btn" data-up="${i}">↑</button><button class="btn" data-down="${i}">↓</button><button class="btn" data-edit="${i}">Edit</button><button class="btn danger" data-del="${i}">Delete</button></div>
+  </div>`).join("");
+  list.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>editProject(+b.dataset.edit));
+  list.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{if(confirm("Delete this project?")){arr.splice(+b.dataset.del,1);renderProjects();markDirty()}});
+  list.querySelectorAll("[data-up]").forEach(b=>b.onclick=()=>move(arr,+b.dataset.up,-1,renderProjects));
+  list.querySelectorAll("[data-down]").forEach(b=>b.onclick=()=>move(arr,+b.dataset.down,1,renderProjects));
+}
+function move(arr,i,d,render){let j=i+d;if(j<0||j>=arr.length)return;[arr[i],arr[j]]=[arr[j],arr[i]];render();markDirty()}
+$("addProject").onclick=()=>{state.projects=state.projects||[];state.projects.unshift({title:"New Project",category:state.categories?.[0]||"",desc:"",role:"",process:"",kind:"image",visible:true,thumb:{name:""},files:[]});renderProjects();editProject(0);markDirty()};
+function editProject(i){
+  projectIndex=i; const p=state.projects[i], box=$("projectEditor"); box.style.display="block";
+  const cats=(state.categories||[]).map(c=>`<option ${c===p.category?"selected":""}>${esc(c)}</option>`).join("");
+  box.innerHTML=`<div class="row between"><h2>Edit Project</h2><button class="btn" id="closeProject">Close</button></div>
+  <div class="grid2">
+    <div class="field"><label>Title</label><input id="pTitle" value="${esc(p.title||"")}"></div>
+    <div class="field"><label>Category</label><select id="pCategory">${cats}</select></div>
+    <div class="field"><label>Description</label><textarea id="pDesc">${esc(p.desc||"")}</textarea></div>
+    <div class="field"><label>Role</label><input id="pRole" value="${esc(p.role||"")}"></div>
+    <div class="field"><label>Process</label><textarea id="pProcess">${esc(p.process||"")}</textarea></div>
+    <div class="field"><label>Kind</label><select id="pKind"><option ${p.kind==="image"?"selected":""}>image</option><option ${p.kind==="video"?"selected":""}>video</option><option ${p.kind==="pdf"?"selected":""}>pdf</option><option ${p.kind==="link"?"selected":""}>link</option></select></div>
+    <div class="field"><label>Thumbnail URL / Path</label><input id="pThumb" value="${esc(p.thumb?.url||p.thumb?.path||p.thumb?.name||"")}"></div>
+    <div class="field"><label>Upload Thumbnail</label><input id="pThumbUpload" type="file" accept="image/*"></div>
+  </div>
+  <div class="upload-card">
+    <h3>Upload Project Files</h3>
+    <p>Choose multiple images, PDFs or videos. They will upload to Supabase Storage and be added to this project. Click <b>Save All Changes</b> after the upload finishes to publish the new file links.</p>
+    <label class="upload-drop" for="pFileUpload">+ Choose project files to upload<input id="pFileUpload" type="file" accept="image/*,video/*,.pdf,application/pdf" multiple></label>
+    <div id="pUploadStatus" class="upload-status" role="status" aria-live="polite">No files selected</div>
+  </div>
+  <h3 style="margin-top:18px">Project Files</h3><div id="pFiles" class="list"></div>
+  <div class="row" style="margin-top:10px"><button id="addPFile" class="btn">+ Add File / Link</button></div>`;
+  const save=()=>{p.title=$("pTitle").value;p.category=$("pCategory").value;p.desc=$("pDesc").value;p.role=$("pRole").value;p.process=$("pProcess").value;p.kind=$("pKind").value;p.thumb=p.thumb||{};const t=$("pThumb").value.trim(); if(/^https?:/.test(t))p.thumb.url=t; else {p.thumb.name=t;p.thumb.path=t};markDirty();renderProjects()};
+  ["pTitle","pCategory","pDesc","pRole","pProcess","pKind","pThumb"].forEach(id=>$(id).oninput=save);
+  $("closeProject").onclick=()=>box.style.display="none";
+  $("addPFile").onclick=()=>{p.files=p.files||[];p.files.push({name:"New file",kind:"image",url:""});renderPFiles(p);markDirty()};
+  $("pThumbUpload").onchange=async e=>{const f=e.target.files[0];if(!f)return;const url=await uploadFile(f,"thumbnails");p.thumb={name:f.name,url};$("pThumb").value=url;save()};
+  $("pFileUpload").onchange=async e=>{
+    const files=Array.from(e.target.files||[]);if(!files.length)return;
+    const input=e.target,status=$("pUploadStatus");input.disabled=true;
+    let completed=0,failed=0;
+    for(const f of files){
+      status.textContent=`Uploading ${completed+failed+1} of ${files.length}: ${f.name}`;
+      try{
+        const url=await uploadFile(f,"projects");
+        p.files=p.files||[];
+        p.files.push({name:f.name,mime:f.type,kind:fileKind(f),size:f.size,url});
+        completed++;renderPFiles(p);markDirty();renderProjects();
+      }catch(err){failed++;status.textContent=`Failed: ${f.name} — ${err.message||err}`;}
+    }
+    status.textContent=`${completed} file(s) uploaded${failed?`, ${failed} failed`:''}. ${completed?'Now click Save All Changes to publish.':''}`;
+    input.value="";input.disabled=false;
+  };
+  renderPFiles(p);
+}
+function fileKind(f){if(f.type.includes("pdf"))return"pdf";if(f.type.startsWith("video/"))return"video";return"image"}
+function renderPFiles(p){
+  const b=$("pFiles"); if(!b)return;
+  b.innerHTML=(p.files||[]).map((f,i)=>`<div class="item" style="grid-template-columns:1fr 160px auto">
+    <div><input data-fname="${i}" value="${esc(f.name||"")}"><div class="field"><label>URL / Path</label><input data-furl="${i}" value="${esc(f.url||f.path||"")}"></div></div>
+    <select data-fkind="${i}"><option ${f.kind==="image"?"selected":""}>image</option><option ${f.kind==="video"?"selected":""}>video</option><option ${f.kind==="pdf"?"selected":""}>pdf</option><option ${f.kind==="link"?"selected":""}>link</option></select>
+    <button class="btn danger" data-fdel="${i}">Delete</button></div>`).join("");
+  b.querySelectorAll("[data-fname]").forEach(x=>x.oninput=()=>{p.files[+x.dataset.fname].name=x.value;markDirty()});
+  b.querySelectorAll("[data-furl]").forEach(x=>x.oninput=()=>{p.files[+x.dataset.furl].url=x.value;markDirty()});
+  b.querySelectorAll("[data-fkind]").forEach(x=>x.onchange=()=>{p.files[+x.dataset.fkind].kind=x.value;markDirty()});
+  b.querySelectorAll("[data-fdel]").forEach(x=>x.onclick=()=>{p.files.splice(+x.dataset.fdel,1);renderPFiles(p);markDirty()});
+}
+
+function renderClients(){
+  const arr=state.clients||[], list=$("clientsList");
+  list.innerHTML=arr.map((c,i)=>`<div class="item"><div class="thumb">${c.image?`<img src="${esc(adminClientLogo(c))}">`:"NO LOGO"}</div><div><b>${esc(c.name||"Client")}</b><div class="small">${c.visible===false?"Hidden":"Visible"}</div></div><div class="row"><button class="btn" data-cu="${i}">↑</button><button class="btn" data-cd="${i}">↓</button><button class="btn" data-ce="${i}">Edit</button><button class="btn danger" data-cx="${i}">Delete</button></div></div>`).join("");
+  list.querySelectorAll("[data-ce]").forEach(b=>b.onclick=()=>editClient(+b.dataset.ce));
+  list.querySelectorAll("[data-cx]").forEach(b=>b.onclick=()=>{if(confirm("Delete client?")){arr.splice(+b.dataset.cx,1);renderClients();markDirty()}});
+  list.querySelectorAll("[data-cu]").forEach(b=>b.onclick=()=>move(arr,+b.dataset.cu,-1,renderClients));
+  list.querySelectorAll("[data-cd]").forEach(b=>b.onclick=()=>move(arr,+b.dataset.cd,1,renderClients));
+}
+$("addClient").onclick=()=>{state.clients=state.clients||[];state.clients.push({id:crypto.randomUUID(),name:"New Client",image:"",url:"",visible:true});renderClients();editClient(state.clients.length-1);markDirty()};
+function editClient(i){
+  const c=state.clients[i],box=$("clientEditor");box.style.display="block";box.innerHTML=`<div class="row between"><h2>Edit Client</h2><button id="closeClient" class="btn">Close</button></div><div class="grid2">
+  <div class="field"><label>Name</label><input id="cName" value="${esc(c.name||"")}"></div><div class="field"><label>Website URL</label><input id="cUrl" value="${esc(c.url||"")}"></div>
+  <div class="field"><label>Logo URL / Path</label><input id="cImage" value="${esc(c.image||"")}"></div><div class="field"><label>Upload Logo</label><input id="cUpload" type="file" accept="image/*"></div>
+  <div class="field"><label>Visible</label><select id="cVisible"><option value="true" ${c.visible!==false?"selected":""}>Yes</option><option value="false" ${c.visible===false?"selected":""}>No</option></select></div></div>`;
+  const save=()=>{c.name=$("cName").value;c.url=$("cUrl").value;c.image=$("cImage").value;c.visible=$("cVisible").value==="true";renderClients();markDirty()};
+  ["cName","cUrl","cImage","cVisible"].forEach(id=>$(id).oninput=save);
+  $("closeClient").onclick=()=>box.style.display="none";
+  $("cUpload").onchange=async e=>{const f=e.target.files[0];if(!f)return;const url=await uploadFile(f,"clients");c.image=url;$("cImage").value=url;save()};
+}
+
+function renderExperience(){
+  const arr=state.content.experiences||[],list=$("experienceList");
+  list.innerHTML=arr.map((x,i)=>`<div class="item" style="grid-template-columns:110px 1fr 1fr 1fr auto"><input data-ey="${i}" value="${esc(x.year||"")}"><input data-ec="${i}" value="${esc(x.company||"")}"><input data-er="${i}" value="${esc(x.role||"")}"><input data-et="${i}" value="${esc(x.type||"")}"><button class="btn danger" data-ex="${i}">Delete</button></div>`).join("");
+  [["ey","year"],["ec","company"],["er","role"],["et","type"]].forEach(([a,k])=>list.querySelectorAll(`[data-${a}]`).forEach(el=>el.oninput=()=>{arr[+el.dataset[a]][k]=el.value;markDirty()}));
+  list.querySelectorAll("[data-ex]").forEach(b=>b.onclick=()=>{arr.splice(+b.dataset.ex,1);renderExperience();markDirty()});
+}
+$("addExperience").onclick=()=>{state.content.experiences=state.content.experiences||[];state.content.experiences.push({year:"",company:"",role:"",type:""});renderExperience();markDirty()};
+
+async function uploadFile(file,folder){
+  const safe=file.name.replace(/[^a-zA-Z0-9._-]+/g,"-");
+  const path=`${folder}/${Date.now()}-${safe}`;
+  const {error}=await sb.storage.from("portfolio").upload(path,file,{upsert:false,cacheControl:"3600"});
+  if(error){alert(error.message);throw error}
+  return sb.storage.from("portfolio").getPublicUrl(path).data.publicUrl;
+}
+$("heroUpload").onchange=async e=>{const f=e.target.files[0];if(!f)return;const u=await uploadFile(f,"site");state.design.heroImageUrl=u;bindFields();markDirty()};
+$("aboutUpload").onchange=async e=>{const f=e.target.files[0];if(!f)return;const u=await uploadFile(f,"site");state.design.aboutImageUrl=u;bindFields();markDirty()};
+
+$("applyJson").onclick=()=>{try{state=JSON.parse($("jsonEditor").value);bindFields();renderAll();markDirty()}catch(e){alert("Invalid JSON: "+e.message)}};
+$("exportBtn").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:"application/json"}));a.download=`mohamed-rady-site-backup-${new Date().toISOString().slice(0,10)}.json`;a.click()};
+$("importInput").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=JSON.parse(r.result);bindFields();renderAll();markDirty()}catch(err){alert("Invalid backup")}};r.readAsText(f)};
+
+initClient();
+</script>
+</body>
+</html>
